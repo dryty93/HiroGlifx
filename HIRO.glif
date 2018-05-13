@@ -1,0 +1,10 @@
+# NEW VAR= 2000 + 5000 #
+# MAIN VAR#= 5
+# NEXT VAR#= 5 - 2
+# N VAR#= 8000 + 9000
+$ M VAR$= 'WE LIKE'
+$ E VAR$= 'what is your name'
+# X VAR#= 150 + 400
+WRITE('no more')
+WRITE('MAIN')
+WRITE(get a life)
