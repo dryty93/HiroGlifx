@@ -8,7 +8,8 @@ $ E VAR$= 'what is your name'
 # X VAR#= 150+400
 $ XT VAR$= 'GO TO BED'
 ^ AN VAR^=(UI('What is your name?':))
-!IF(3 > 2)!
+!IF(3 < 2)!
+!IF(55 > 1)!
 WRITE("$ XT VAR")
 WRITE("# N VAR")
 WRITE("$ N VAR")

@@ -1,6 +1,7 @@
 from simpleLibrary import *
 from HIRO_HELPER import getType
 
+bools = []
 equations = []
 fEquationList = []
 numList = []
@@ -21,14 +22,7 @@ varNamesFinal = []
 counter = 0
 h = []
 promptList = []
-tokens = {'!': False,
-          'IF': 'if',
-          '|?|': 'or',
-          '&': 'and',
-          '^': 'not',
-          'within': 'in',
-          'variable':'VAR',
-          }
+tokens = ['!','!IF', '$','#', '&', '<','>','=','!=']
 
 keywords = ['WRITE', 'TYPES']
 counter = 1
@@ -44,6 +38,14 @@ with open('scroll.glif','r') as readFile:
             condJoiner = ''.join(cond)
             condJoinerN = condJoiner.split(')!')
             finalCond = ''.join(condJoinerN)
+            for chars in finalCond:
+                if chars.isdigit() or chars in tokens[:]:
+                    bools.append(chars)
+            numFinal = ''.join(bools)
+            lBool = eval(numFinal)
+            
+
+
 
         if 'WRITE' in words:
             numList = []
@@ -67,17 +69,6 @@ with open('scroll.glif','r') as readFile:
                 if everything in finalWriter:
                     write(varDict[everything])
 
-
-        if '!' in words:
-            bool()
-
-        def bool():
-            tokens['!'] = True
-
-            if tokens:
-                print('conditional')
-            else:
-                print('no')
 
 
         for items in varDict:
