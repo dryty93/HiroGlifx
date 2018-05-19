@@ -14,15 +14,12 @@ indChars = []
 symbols = []
 addition = []
 subtraction = []
-varVals = []
 fVarName = []
 EVAL = ['+', '-', '*', '/']
 dataTypes = {"$":"STRING", "#":"NUM"}
 varNamesFinal = []
 counter = 0
 h = []
-nub = []
-mm = []
 promptList = []
 tokens = {'!': False,
           'IF': 'if',
@@ -37,18 +34,28 @@ keywords = ['WRITE', 'TYPES']
 counter = 1
 varDict = {}
 
-with open('HIRO.glif','r') as readFile:
+with open('scroll.glif','r') as readFile:
 
     for words in readFile:
 
         VARS.append(words)
+        if '!IF' in words:
+            cond = words.split('!IF(')
+            condJoiner = ''.join(cond)
+            condJoinerN = condJoiner.split(')!')
+            finalCond = ''.join(condJoinerN)
 
         if 'WRITE' in words:
             numList = []
             writing()
 
 
+
         def writing():
+
+            #i likely will rewrite this so that it is more reusable for the entire project.
+            #because i find myself repeating this same code with little differences for all functions
+            # within the code.
             writeSequence = words.split('WRITE')
             writeStringJoin = ''.join(writeSequence)
             fWriteSequence = writeStringJoin.split('(')
@@ -93,10 +100,6 @@ with open('HIRO.glif','r') as readFile:
             if "^" in items and 'WRITE' not in items:
                 promptList.append(promptVal)
 
-
-
-
-
         for numbers in numList:
            h.append(varDict[numbers])
 
@@ -119,11 +122,7 @@ with open('HIRO.glif','r') as readFile:
             fPromptW = lPrompt.split(')')
             finalPrompt = ''.join(fPromptW)
             ui(finalPrompt)
-
-
-
-
-
+            varDict[finalPrompt[1]] = [promptVal]
 
 
         counter += 1

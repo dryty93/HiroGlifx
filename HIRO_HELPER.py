@@ -15,7 +15,7 @@ counter = 0
 h = []
 
 
-with open('HIRO.glif','r') as readFile:
+with open('scroll.glif','r') as readFile:
 
     for words in readFile:
 
