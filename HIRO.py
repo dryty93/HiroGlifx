@@ -1,5 +1,5 @@
 from simpleLibrary import *
-from HIROTEST import getType
+from HIRO_HELPER import getType
 
 equations = []
 fEquationList = []
@@ -23,6 +23,7 @@ counter = 0
 h = []
 nub = []
 mm = []
+promptList = []
 tokens = {'!': False,
           'IF': 'if',
           '|?|': 'or',
@@ -35,6 +36,7 @@ tokens = {'!': False,
 keywords = ['WRITE', 'TYPES']
 counter = 1
 varDict = {}
+
 with open('HIRO.glif','r') as readFile:
 
     for words in readFile:
@@ -77,25 +79,32 @@ with open('HIRO.glif','r') as readFile:
                 isNum = True
                 numList.append(items)
 
+            if "+" in varValues and isString == False:
+                addThis = varDict[items].split('=')
+                add = addThis[1]
+                added = add.split('+')
 
-            if "$" in items:
+
+            if "$" in items and 'WRITE' not in items:
                 isString = True
                 isNum = False
                 strList.append(items)
 
+            if "^" in items and 'WRITE' not in items:
+                promptList.append(promptVal)
 
-        if not isNum:
-            nub = []
+
+
+
 
         for numbers in numList:
            h.append(varDict[numbers])
-        for el in h:
-            rr = el.join('#=')
 
         if 'UI' in words:
+
             def ui(rawInput):
 
-                global e
+                global promptVal
 
                 prompt = input(rawInput)
                 if prompt:
@@ -110,6 +119,11 @@ with open('HIRO.glif','r') as readFile:
             fPromptW = lPrompt.split(')')
             finalPrompt = ''.join(fPromptW)
             ui(finalPrompt)
+
+
+
+
+
 
 
         counter += 1
