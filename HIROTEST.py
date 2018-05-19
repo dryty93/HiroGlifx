@@ -65,7 +65,7 @@ with open('HIRO.glif','r') as readFile:
                             numbers = digOnly[:-1]
                             add = (eval(variables))
                             addition.append(add)
-                            print(add)
+                            print(addition)
 
                         if '+' not in variables[:]:
                             addition = []
@@ -76,7 +76,7 @@ with open('HIRO.glif','r') as readFile:
                             numbers = digOnly[:-1]
                             subtract = (eval(variables))
                             subtraction.append(subtract)
-                            print(subtract)
+                            print(subtraction)
 
 
 

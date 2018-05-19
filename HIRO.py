@@ -1,6 +1,7 @@
 from simpleLibrary import *
 from HIROTEST import getType
 
+equations = []
 fEquationList = []
 numList = []
 strList = []
@@ -20,6 +21,8 @@ dataTypes = {"$":"STRING", "#":"NUM"}
 varNamesFinal = []
 counter = 0
 h = []
+nub = []
+mm = []
 tokens = {'!': False,
           'IF': 'if',
           '|?|': 'or',
@@ -41,6 +44,7 @@ with open('HIRO.glif','r') as readFile:
         if 'WRITE' in words:
             numList = []
             writing()
+
 
         def writing():
             writeSequence = words.split('WRITE')
@@ -65,17 +69,47 @@ with open('HIRO.glif','r') as readFile:
                 print('conditional')
             else:
                 print('no')
-        for items in VARS:
-            if "#" in items:
+
+
+        for items in varDict:
+            if "#" in items and "WRITE" not in items:
                 isString = False
                 isNum = True
                 numList.append(items)
+
+
             if "$" in items:
                 isString = True
                 isNum = False
                 strList.append(items)
-        if '+' or '-' or '/' or '*' in words:
-            getType()
+
+
+        if not isNum:
+            nub = []
+
+        for numbers in numList:
+           h.append(varDict[numbers])
+        for el in h:
+            rr = el.join('#=')
+
+        if 'UI' in words:
+            def ui(rawInput):
+
+                global e
+
+                prompt = input(rawInput)
+                if prompt:
+                    promptVal = prompt
+
+                    return promptVal + ' (ui)'
+
+            promptSeq = words.split('UI')
+            promptJOin = ''.join(promptSeq)
+            fPrompt = promptJOin.split('(')
+            lPrompt = ''.join(fPrompt)
+            fPromptW = lPrompt.split(')')
+            finalPrompt = ''.join(fPromptW)
+            ui(finalPrompt)
 
 
         counter += 1
@@ -84,4 +118,3 @@ with open('HIRO.glif','r') as readFile:
 
         varNames =str(varDict.keys())
         varValues = str(varDict.values())
-

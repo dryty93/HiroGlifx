@@ -6,6 +6,7 @@ Python 3.6
 """
 
 
+
 def types(varType):
 
     # changes string type
@@ -34,7 +35,6 @@ def write(n):
 def ListToString(List):
     join = ' '.join(List)
     print(join)
-
 
 
 
