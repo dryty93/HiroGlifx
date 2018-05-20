@@ -1,6 +1,8 @@
 from simpleLibrary import *
 from HIRO_HELPER import getType
 
+
+writeFun = 2 > 4
 bools = []
 equations = []
 fEquationList = []
@@ -33,6 +35,33 @@ with open('scroll.glif','r') as readFile:
     for words in readFile:
 
         VARS.append(words)
+
+
+        if 'WRITE' in words:
+            writeFun = 2 > 1
+            if writeFun:
+                def writing():
+
+                    #i likely will rewrite this so that it is more reusable for the entire project.
+                    #because i find myself repeating this same code with little differences for all functions
+                    # within the code.
+                    writeSequence = words.split('WRITE')
+                    writeStringJoin = ''.join(writeSequence)
+                    fWriteSequence = writeStringJoin.split('(')
+                    o = ''.join(fWriteSequence)
+                    fWrite = o.split(')')
+                    finalWriter = ''.join(fWrite)
+                    write(finalWriter)
+                    for everything in varDict:
+                        if everything in finalWriter:
+                            write(varDict[everything])
+
+            if '{' not in words:
+                if'}' not in words:
+                    numList = []
+                    writing()
+
+
         if '!IF' in words:
             cond = words.split('!IF(')
             condJoiner = ''.join(cond)
@@ -43,33 +72,28 @@ with open('scroll.glif','r') as readFile:
                     bools.append(chars)
             numFinal = ''.join(bools)
             lBool = eval(numFinal)
-            
+            #write(lBool)
+            if lBool:
+                writeFun = 2 > 1
+                execute = words.split('!')
+                exJoin = execute[2]
+                exFinal = exJoin.split('{')
+                exFi = ''.join(exFinal)
+                exFinale = exFi.split('}')
+                finalExecution = exFinale[0]
 
-
-
-        if 'WRITE' in words:
-            numList = []
-            writing()
-
-
-
-        def writing():
-
-            #i likely will rewrite this so that it is more reusable for the entire project.
-            #because i find myself repeating this same code with little differences for all functions
-            # within the code.
-            writeSequence = words.split('WRITE')
-            writeStringJoin = ''.join(writeSequence)
-            fWriteSequence = writeStringJoin.split('(')
-            o = ''.join(fWriteSequence)
-            fWrite = o.split(')')
-            finalWriter = ''.join(fWrite)
-            write(finalWriter)
-            for everything in varDict:
-                if everything in finalWriter:
-                    write(varDict[everything])
-
-
+                # i am going to seperate each function into a class for reusability. This works,but is messy.
+                if 'WRITE' in finalExecution:
+                    writeSequence = finalExecution.split('WRITE')
+                    writeStringJoin = ''.join(writeSequence)
+                    fWriteSequence = writeStringJoin.split('(')
+                    o = ''.join(fWriteSequence)
+                    fWrite = o.split(')')
+                    finalWriter = ''.join(fWrite)
+                    write(finalWriter)
+                    for everything in varDict:
+                        if everything in finalWriter:
+                            write(varDict[everything])
 
         for items in varDict:
             if "#" in items and "WRITE" not in items:

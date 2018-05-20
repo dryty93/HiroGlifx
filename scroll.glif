@@ -1,5 +1,6 @@
 # NEW VAR#= 2000+5000#
 # MAIN VAR#= 5
+# MA VAR#= 2
 # NEXT VAR#= 5-2
 # N VAR#= 8000+9000
 $ N VAR$= 'WOOO'
@@ -8,9 +9,8 @@ $ E VAR$= 'what is your name'
 # X VAR#= 150+400
 $ XT VAR$= 'GO TO BED'
 ^ AN VAR^=(UI('What is your name?':))
-!IF(3 < 2)!
-!IF(55 > 1)!
-WRITE("$ XT VAR")
-WRITE("# N VAR")
-WRITE("$ N VAR")
-WRITE("$ M VAR")
+!IF(4 < 3)!{WRITE('hi')}
+!IF(4  > 1)!{WRITE('hell')}
+!IF( 5 > 3)!{WRITE('hie')}
+
+WRITE('FF')
