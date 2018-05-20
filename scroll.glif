@@ -12,5 +12,4 @@ $ XT VAR$= 'GO TO BED'
 !IF(4 < 3)!{WRITE('hi')}
 !IF(4  > 1)!{WRITE('hell')}
 !IF( 5 > 3)!{WRITE('hie')}
-
 WRITE('FF')

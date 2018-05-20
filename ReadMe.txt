@@ -5,17 +5,30 @@ Table of Contents:
 
 1:What is HIROGLIFX?
 2:Creating a HIROGLIFX project
-2:Ints & Strings
-3: Decorators and Variable Declaration
-4: Keywords
-5: UI (User Input)
+3:Ints & Strings
+4: Decorators and Variable Declaration
+5: Keywords
+6: UI (User Input)
 
-HIRO or HIROGLIFX is a high level interpreted language implemented in Python. It's purpose is to help 
+1.What is HIROGLIFX?
+
+HIRO or HIROGLIFX is a high level interpreted (toy) language implemented in Python. It's purpose is to help
 people who want to learn to write code by using a very basic syntax.
 It's basic rules are as followed. 
 
-To start a HIROGLIFX project simply create a new file with the name "scroll.glif".After you can type all your code within this file.
+2. Creating a HIROGLIFX project
 
+To start a HIROGLIFX project simply create a new file with the name "scroll.glif".
+All code for your project goes into this file.
+
+3. Ints(Nums) & Strings
+
+Ints or Nums are described as integers that do not contain a decimal point.
+They can perform various operations including addition, subtraction, etc.
+All Strings are ASCII characters not including numbers contained within a
+pair of ""..
+
+4. Decorators & Variable Declaration
 
 Decorators are simply ASCII characters reserved for specific operations or uses in HIRO.
 The ! decorator is used to express a conditional statement. These include if and else statements.
@@ -31,7 +44,26 @@ $ NAME VAR$= "Noah"
 As you can see variable names are capitalized within the structure (Decorator Variable_Name VARDecorator=). Also strings need
 quotations to be stored in memory. You can get a variable's data by typing (Decorator VARNAME VAR). 
 
-To print to the terminal use the keyword WRITE(). You can write all data types, and the values of variables that have already been 
+5. Keywords
+
+There are many keywords that are used for specific circumstances within HIROGLIFX. All keywords are capitalized
+within HIRO for readability purposes. They are as followed:
+
+WRITE():
+
+To print to the terminal use the keyword WRITE(). You can write all data types, and the values of variables that have already been
 declared.
+
+!IF!{}:
+
+!IF!{} is the construction for an if statement within HIRO. The proper structure is as follows:
+
+!IF CONDITION!{EXECUTE THIS}
+
+As you can see the if statement checks the condition within the logical decorator (!!) and executes the code within the
+{} if this condition evaluates to True.
+
+6. User Input
+
 User Input is gathered by using the UI(' ') command. 
 
