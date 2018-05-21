@@ -18,9 +18,9 @@ It's basic rules are as followed.
 
 2. Creating a HIROGLIFX project
 
-To start a HIROGLIFX project simply create a new file with the name "scroll.glif".
+To start a HIROGLIFX project simply open the provided file named "scroll.glif".
 All code for your project goes into this file.Run the HIRO.py file to see what your 
-code outputs
+code outputs.
 
 3. Ints(Nums) & Strings
 
