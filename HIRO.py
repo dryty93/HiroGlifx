@@ -10,17 +10,14 @@ isInt = False
 numList = []
 stringList = []
 n = {}
-log = []
 bools = []
 
 def varSetter():
     for chars in tokens:
-       # write(i)
         w = words.split('VAR')
         wFuncs = words.split('WRITE')
-        #write(wFuncs)
         if chars not in w:
-            if '#' or '$' in chars:
+            if '#' or '$' or '^' in chars:
 
                 varDict[str(w[0])] = str(w[-1])
 
@@ -29,7 +26,7 @@ def varSetter():
 
         if '#' in elements:
             numList.append(elements)
-            #intSet()
+            intSet()
 
 
         if '$' in elements:
@@ -42,20 +39,21 @@ def varSetter():
 
     if 'WRITE' in notVars:
         del varDict[notVars]
-                   # write(varDict)
-
-
-       # write(functionLibrary)
-       # write(varDict)
 
 def intSet():
     isString = False
     isInt = True
 
 
+
+
 def stringSet():
     isString = True
     isInt = False
+
+def comment():
+
+    pass
 
 def boolStat():
     # commands for conditional operators
@@ -75,10 +73,10 @@ def boolStat():
                 bools = []
 
     numFinal = ''.join(bools)
+
     lBool = eval(numFinal)
 
     if lBool:
-        write(lBool)
         writeFun = 2 > 1
         execute = words.split('!')
         exJoin = execute[2]
@@ -98,6 +96,7 @@ def boolStat():
             for everything in varDict:
                 if everything in finalWriter:
                     write(varDict[everything])
+
     else:
         pass
 
@@ -130,9 +129,10 @@ def ui(rawInput):
 
     if prompt:
         promptVal = prompt
-
-        return promptVal + ' (ui)'
-    varDict[finalPrompt[1]] = [promptVal]
+        varDict[finalPrompt[1]] = [promptVal]
+def  stringCut(stringOfInterest, whatToCut):
+    if 'XX' in words:
+        stringOfInterest.split(whatToCut)
 
 def uIOut():
     global finalPrompt
@@ -142,13 +142,15 @@ def uIOut():
     lPrompt = ''.join(fPrompt)
     fPromptW = lPrompt.split(')')
     finalPrompt = ''.join(fPromptW)
-
     ui(finalPrompt)
 
 
 with open('scroll.glif', 'r') as readFile:
     for words in readFile:
         inPut.append(words)
+
+        if './' in words:
+            comment()
 
         if '!' in words:
             boolStat()
