@@ -14,5 +14,5 @@ WRITE( # NEW VAR)
 !IF(4 > 1)!{WRITE('hello')}
 !IF(5 < 1)!{WRITE('you')}
 !IF(3 > 1)!{WRITE('yerou')}
-!IF(7 > 1)!{WRITE('WEEE')}
+!IF(101 > 100)!{WRITE('WEEE')}
 WRITE( ^ INP VAR) WRITE('HI')

@@ -41,10 +41,28 @@ def varSetter():
         del varDict[notVars]
 
 def intSet():
+    #intense editing underway. Adding math expressions such as multiplication, addition, etc.
+    # starting with addition for simplicity.
     isString = False
     isInt = True
+    if '+' in words:
+        operation = words.split('=')
+        join =''.join(operation)
+        opNow = join.split('#')
+        finalOp = opNow[2]
+        write(eval(finalOp))
 
-
+        #if finalOp.isdigit():
+            #write('e')
+            #sum = eval(finalOp)
+            #/write(sum)
+        """for integers in opNow[2]:
+            write(integers)
+            
+            if integers.isdigit():
+                sum = eval(integers)
+                write(sum)
+"""
 
 
 def stringSet():
@@ -66,6 +84,10 @@ def boolStat():
     bools = []
 
     for chars in finalCond:
+        #put chars for digits as its own list and check the length
+        #of the character. As of now only single digits work
+        # which is in fact a bug. Working to fix this now
+
         if chars.isdigit() or chars in tokens[:]:
 
             bools.append(chars)
@@ -130,7 +152,8 @@ def ui(rawInput):
     if prompt:
         promptVal = prompt
         varDict[finalPrompt[1]] = [promptVal]
-def  stringCut(stringOfInterest, whatToCut):
+
+def stringCut(stringOfInterest, whatToCut):
     if 'XX' in words:
         stringOfInterest.split(whatToCut)
 
@@ -162,5 +185,6 @@ with open('scroll.glif', 'r') as readFile:
         if 'WRITE' in words:
             if '!' not in words:
                 writing()
+
         if 'UI' in words:
             uIOut()
