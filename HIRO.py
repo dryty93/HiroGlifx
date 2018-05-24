@@ -85,13 +85,11 @@ def boolStat():
 
     for chars in finalCond:
         #put chars for digits as its own list and check the length
-        #of the character. As of now only single digits work
-        # which is in fact a bug. Working to fix this now
-
+        #of the character. 
         if chars.isdigit() or chars in tokens[:]:
 
             bools.append(chars)
-            if len(bools) > 3:
+            if '\n' in bools:
                 bools = []
 
     numFinal = ''.join(bools)

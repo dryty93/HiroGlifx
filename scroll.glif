@@ -10,9 +10,9 @@ $ E VAR$= 'what is your name'
 $ XT VAR$= 'GO TO BED'
 ^ INP VAR^=(UI('What is your name?':))
 WRITE( # NEW VAR)
-!IF( 2 > 3)!{WRITE('hi')}
-!IF(4 > 1)!{WRITE('hello')}
-!IF(5 < 1)!{WRITE('you')}
+!IF( 200 > 366)!{WRITE('hi')}
+!IF(40 < 100)!{WRITE('hello')}
+!IF(500 > 1)!{WRITE('you')}
 !IF(3 > 1)!{WRITE('yerou')}
 !IF(101 > 100)!{WRITE('WEEE')}
 WRITE( ^ INP VAR) WRITE('HI')
