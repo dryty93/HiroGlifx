@@ -45,24 +45,25 @@ def intSet():
     # starting with addition for simplicity.
     isString = False
     isInt = True
+
+    #might have to write seperate functions for each type of problem(add,subtract, etc)
     if '+' in words:
         operation = words.split('=')
         join =''.join(operation)
         opNow = join.split('#')
+        write(opNow)
         finalOp = opNow[2]
         write(eval(finalOp))
 
-        #if finalOp.isdigit():
-            #write('e')
-            #sum = eval(finalOp)
-            #/write(sum)
-        """for integers in opNow[2]:
-            write(integers)
-            
-            if integers.isdigit():
-                sum = eval(integers)
-                write(sum)
-"""
+    if '-' in words:
+        operation = words.split('=')
+        join = ''.join(operation)
+        opNow = join.split('#')
+        write(opNow)
+        finalOp = opNow[2]
+        write(eval(finalOp))
+
+
 
 
 def stringSet():
@@ -85,7 +86,7 @@ def boolStat():
 
     for chars in finalCond:
         #put chars for digits as its own list and check the length
-        #of the character. 
+        #of the character.
         if chars.isdigit() or chars in tokens[:]:
 
             bools.append(chars)
@@ -116,6 +117,7 @@ def boolStat():
             for everything in varDict:
                 if everything in finalWriter:
                     write(varDict[everything])
+
 
     else:
         pass
@@ -186,3 +188,6 @@ with open('scroll.glif', 'r') as readFile:
 
         if 'UI' in words:
             uIOut()
+
+        if words.isdigit():
+            intSet()

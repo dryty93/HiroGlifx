@@ -12,7 +12,7 @@ $ XT VAR$= 'GO TO BED'
 WRITE( # NEW VAR)
 !IF( 200 > 366)!{WRITE('hi')}
 !IF(40 < 100)!{WRITE('hello')}
-!IF(500 > 1)!{WRITE('you')}
-!IF(3 > 1)!{WRITE('yerou')}
+!IF(5000000 > 1000)!{WRITE('you did it')}
+!IF(3 > 1)!{WRITE(# NEW VAR)}
 !IF(101 > 100)!{WRITE('WEEE')}
 WRITE( ^ INP VAR) WRITE('HI')
