@@ -1,8 +1,8 @@
 from simpleLibrary import *
 
-
 functionLibrary = {}
-tokens = ['!', 'WRITE', '+', 'IF', '<', '>']
+tokens = ['!', 'WRITE', '+', 'IF', '<', '>', 'in']
+expression = ['+', '-', '/', '*']
 inPut = []
 varDict = {}
 isString = False
@@ -12,13 +12,15 @@ stringList = []
 n = {}
 bools = []
 
+
 def varSetter():
+    global w
+
     for chars in tokens:
         w = words.split('VAR')
         wFuncs = words.split('WRITE')
         if chars not in w:
             if '#' or '$' or '^' in chars:
-
                 varDict[str(w[0])] = str(w[-1])
 
     for elements in varDict:
@@ -28,11 +30,9 @@ def varSetter():
             numList.append(elements)
             intSet()
 
-
         if '$' in elements:
             stringList.append(elements)
-            #stringSet()
-
+            # stringSet()
 
     for notVars in varDict:
         n = varDict.copy()
@@ -40,39 +40,73 @@ def varSetter():
     if 'WRITE' in notVars:
         del varDict[notVars]
 
+
+def in_key_word():
+    IN = False
+    initIn = words.split('IN')
+    inJoin = ''.join(initIn)
+    sndIn = inJoin.split('(')
+    thirdIn = ''.join(sndIn)
+    fourthIn = thirdIn.split(')')
+    finalIn = ''.join(fourthIn)
+    if 'in' in finalIn:
+        IN = True
+        # write('true')
+
+
 def intSet():
-    #intense editing underway. Adding math expressions such as multiplication, addition, etc.
+    global opNow
+    global finalOp
+    global summ
+    # intense editing underway. Adding math expressions such as multiplication, addition, etc.
     # starting with addition for simplicity.
     isString = False
     isInt = True
 
-    #might have to write seperate functions for each type of problem(add,subtract, etc)
+    # might have to write seperate functions for each type of problem(add,subtract, etc)
     if '+' in words:
         operation = words.split('=')
-        join =''.join(operation)
+        join = ''.join(operation)
         opNow = join.split('#')
-        write(opNow)
         finalOp = opNow[2]
-        write(eval(finalOp))
+        summ = eval(finalOp)
+        varDict[str(w[0])] = summ
 
     if '-' in words:
         operation = words.split('=')
         join = ''.join(operation)
         opNow = join.split('#')
-        write(opNow)
         finalOp = opNow[2]
-        write(eval(finalOp))
+        diff = eval(finalOp)
+        varDict[str(w[0])] = diff
 
+    if '/' in words:
+        operation = words.split('=')
+        join = ''.join(operation)
+        opNow = join.split('#')
+        finalOp = opNow[2]
+        quotient = eval(finalOp)
+        varDict[str(w[0])] = quotient
 
+    if '*' in words:
+        operation = words.split('=')
+        join = ''.join(operation)
+        opNow = join.split('#')
+        finalOp = opNow[2]
+        product = eval(finalOp)
 
 
 def stringSet():
     isString = True
     isInt = False
 
+
 def comment():
+    if not '//' in words:
+        pass
 
     pass
+
 
 def boolStat():
     # commands for conditional operators
@@ -85,8 +119,8 @@ def boolStat():
     bools = []
 
     for chars in finalCond:
-        #put chars for digits as its own list and check the length
-        #of the character.
+        # put chars for digits as its own list and check the length
+        # of the character.
         if chars.isdigit() or chars in tokens[:]:
 
             bools.append(chars)
@@ -114,18 +148,18 @@ def boolStat():
             fWrite = o.split(')')
             finalWriter = ''.join(fWrite)
             write(finalWriter)
-            for everything in varDict:
-                if everything in finalWriter:
-                    write(varDict[everything])
+        for everything in varDict:
+            if everything in finalWriter:
+                write(varDict[everything])
+
+
 
 
     else:
         pass
 
 
-
 def writing():
-
     # i likely will rewrite this so that it is more reusable for the entire project
     #  because i find myself repeating this same code with little differences for all functions
     #  within the code.
@@ -142,20 +176,29 @@ def writing():
             write(varDict[everything])
 
 
-
-def ui(rawInput):
+def ui(userInput):
     global prompt
     global promptVal
 
-    prompt = input(rawInput)
+    prompt = input(userInput)
 
-    if prompt:
-        promptVal = prompt
-        varDict[finalPrompt[1]] = [promptVal]
+    varDict[finalPrompt[1]] = prompt
+    write(prompt)
+    if '+' or '-' or '/' or '*' in prompt:
+        evaluations()
+
+
+def evaluations():
+    global n
+    for signs in expression:
+        if signs in prompt:
+            n = eval(prompt)
+            print(prompt, '=', n)
+
 
 def stringCut(stringOfInterest, whatToCut):
-    if 'XX' in words:
-        stringOfInterest.split(whatToCut)
+    stringOfInterest.split(whatToCut)
+
 
 def uIOut():
     global finalPrompt
@@ -168,26 +211,39 @@ def uIOut():
     ui(finalPrompt)
 
 
-with open('scroll.glif', 'r') as readFile:
-    for words in readFile:
-        inPut.append(words)
+loop = True
 
-        if './' in words:
-            comment()
+while loop:
+    with open('scroll.glif', 'r') as readFile:
+        for words in readFile:
+            inPut.append(words)
 
-        if '!' in words:
-            boolStat()
+            if '<BRK>' in words:
+                loop = False
 
-        if 'VAR' in words:
-            varSetter()
+            if '//' in words:
+                comment()
+
+            if 'XX' in words:
+                stringCut(words, words)
+
+            if '!' in words:
+                boolStat()
+
+            if 'VAR' in words:
+                varSetter()
+
+            if 'WRITE' in words:
+                if '!' not in words:
+                    writing()
+
+            if 'UI' in words:
+                uIOut()
+
+            if words.isdigit():
+                intSet()
+
+            # if 'in' in words:
+            #   in_key_word()
 
 
-        if 'WRITE' in words:
-            if '!' not in words:
-                writing()
-
-        if 'UI' in words:
-            uIOut()
-
-        if words.isdigit():
-            intSet()

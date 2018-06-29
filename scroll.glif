@@ -8,12 +8,12 @@ $ M VAR$= 'WE LIKE'
 # H VAR#= 77
 $ E VAR$= 'what is your name'
 # X VAR#= 400
+!IF(4 < 8)!{WRITE( $ N VAR)}
 $ XT VAR$= 'This is a string'
 ^ INP VAR^=(UI('What is your name?':))
-WRITE( ^ INP VAR)
 WRITE( # NEW VAR)
 WRITE( # MA VAR)
-!IF( 200 > 366)!{WRITE('hi')}
+!IF( 200 > 366)!{WRITE(hi)}
 !IF(40 < 100)!{WRITE('hello')}
 !IF(5000000 > 1000)!{WRITE('you did it')}
 !IF(3 < 1)!{WRITE(# NEW VAR)}

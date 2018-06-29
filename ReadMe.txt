@@ -22,12 +22,17 @@ To start a HIROGLIFX project simply open the provided file named "scroll.glif".
 All code for your project goes into this file.Run the HIRO.py file to see what your 
 code outputs.
 
+** Note scrolls (scroll.glif files) are automatically generated within a while loop for your convenience
+** If you need to break out of the loop simply use the <BRK> keyword (check the scroll
+** file in the Hello World folder in this directory for an example). If this file did not contain the
+** <BRK> keyword it would run in an infinite loop (which would be annoying).
+
 3. Ints(Nums) & Strings
 
 Ints or Nums are described as integers that do not contain a decimal point.
 They can perform various operations including addition, subtraction, etc.
 All Strings are ASCII characters not including numbers contained within a
-pair of ""..
+pair of "".
 
 4. Decorators & Variable Declaration
 

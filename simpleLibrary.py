@@ -28,8 +28,8 @@ def ListConcat(iterVal,oldList, newList, wordToAdd ):
         write(newList)
 
 
-def write(n):
-    write = print(n)
+def write(textToScreen):
+    write = print(textToScreen)
 
 
 def ListToString(List):
