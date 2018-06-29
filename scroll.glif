@@ -6,15 +6,14 @@
 $ N VAR$= 'also a string'
 $ M VAR$= 'WE LIKE'
 # H VAR#= 77
-$ E VAR$= 'what is your name'
 # X VAR#= 400
-!IF(4 < 8)!{WRITE( $ N VAR)}
-$ XT VAR$= 'This is a string'
-^ INP VAR^=(UI('What is your name?':))
-WRITE( # NEW VAR)
-WRITE( # MA VAR)
-!IF( 200 > 366)!{WRITE(hi)}
-!IF(40 < 100)!{WRITE('hello')}
+!IF( H -INSIDE- HELLO )!{WRITE('FOUND T')}
+!IF(4 > 8)!{WRITE( $ N VAR)}
+!IF( ww -INSIDE- HELLO )!{WRITE('FOUND W')}
+!IF(200 > 366 )!{WRITE(hi)}
 !IF(5000000 > 1000)!{WRITE('you did it')}
+!IF((# MAIN VAR) > (# NEXT VAR))!{WRITE('smart')}
+WRITE(# NEW VAR)
 !IF(3 < 1)!{WRITE(# NEW VAR)}
-!IF(101 > 100)!{WRITE('Hello World')}
+!IF(5 > 100)!{WRITE('Hello World')}
+<BRK>

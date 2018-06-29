@@ -110,6 +110,9 @@ def comment():
 
 def boolStat():
     # commands for conditional operators
+    global lBool
+    global finalCond
+    global finalExecution
 
     cond = words.split('!IF(')
     condJoiner = ''.join(cond)
@@ -126,37 +129,55 @@ def boolStat():
             bools.append(chars)
             if '\n' in bools:
                 bools = []
+                print(bools)
 
-    numFinal = ''.join(bools)
 
-    lBool = eval(numFinal)
+    boolDecide = ''.join(bools)
+    bareBoolDecide = boolDecide.split('<')
+    boolJoin = ''.join(bareBoolDecide)
+    bBoolDecideFin = boolJoin.split('>')
+    boolFinDecider = ''.join(bBoolDecideFin)
+    if boolFinDecider.isdigit():
+        numFinal = boolDecide
+        lBool = eval(numFinal)
+        boolExec()
 
-    if lBool:
-        writeFun = 2 > 1
-        execute = words.split('!')
-        exJoin = execute[2]
-        exFinal = exJoin.split('{')
-        exFi = ''.join(exFinal)
-        exFinale = exFi.split('}')
-        finalExecution = exFinale[0]
 
-        if 'WRITE' in finalExecution:
-            writeSequence = finalExecution.split('WRITE')
-            writeStringJoin = ''.join(writeSequence)
-            fWriteSequence = writeStringJoin.split('(')
-            o = ''.join(fWriteSequence)
-            fWrite = o.split(')')
-            finalWriter = ''.join(fWrite)
-            write(finalWriter)
+    elif '-INSIDE-' in finalCond:
+            bools.append(chars)
+            if '\n' in bools:
+                bools = []
+
+            lBoolSplitter = finalCond.split(' ')
+            lBoolcond_one = lBoolSplitter[1]
+            lBoolcond_two = lBoolSplitter[3]
+
+            if lBoolcond_one in lBoolcond_two:
+                lBool = 2 > 1
+
+
+                if lBool:
+                    boolExec()
+
+def boolExec():
+    writeFun = 2 > 1
+    execute = words.split('!')
+    exJoin = execute[2]
+    exFinal = exJoin.split('{')
+    exFi = ''.join(exFinal)
+    exFinale = exFi.split('}')
+    finalExecution = exFinale[0]
+    if 'WRITE' in finalExecution:
+        writeSequence = finalExecution.split('WRITE')
+        writeStringJoin = ''.join(writeSequence)
+        fWriteSequence = writeStringJoin.split('(')
+        o = ''.join(fWriteSequence)
+        fWrite = o.split(')')
+        finalWriter = ''.join(fWrite)
+        write(finalWriter)
         for everything in varDict:
             if everything in finalWriter:
                 write(varDict[everything])
-
-
-
-
-    else:
-        pass
 
 
 def writing():

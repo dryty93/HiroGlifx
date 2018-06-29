@@ -37,29 +37,15 @@ def varSetter():
     for notVars in varDict:
         n = varDict.copy()
 
-    if 'WRITE' in notVars:
-        del varDict[notVars]
 
 
-def in_key_word():
-    IN = False
-    initIn = words.split('IN')
-    inJoin = ''.join(initIn)
-    sndIn = inJoin.split('(')
-    thirdIn = ''.join(sndIn)
-    fourthIn = thirdIn.split(')')
-    finalIn = ''.join(fourthIn)
-    if 'in' in finalIn:
-        IN = True
-        # write('true')
 
 
 def intSet():
     global opNow
     global finalOp
     global summ
-    # intense editing underway. Adding math expressions such as multiplication, addition, etc.
-    # starting with addition for simplicity.
+
     isString = False
     isInt = True
 
@@ -110,6 +96,9 @@ def comment():
 
 def boolStat():
     # commands for conditional operators
+    global lBool
+    global finalCond
+    global finalExecution
 
     cond = words.split('!IF(')
     condJoiner = ''.join(cond)
@@ -126,37 +115,56 @@ def boolStat():
             bools.append(chars)
             if '\n' in bools:
                 bools = []
+    print(bools)
 
-    numFinal = ''.join(bools)
 
-    lBool = eval(numFinal)
+    boolDecide = ''.join(bools)
 
-    if lBool:
-        writeFun = 2 > 1
-        execute = words.split('!')
-        exJoin = execute[2]
-        exFinal = exJoin.split('{')
-        exFi = ''.join(exFinal)
-        exFinale = exFi.split('}')
-        finalExecution = exFinale[0]
+    bareBoolDecide = boolDecide.split('<')
+    boolJoin = ''.join(bareBoolDecide)
+    bBoolDecideFin = boolJoin.split('>')
+    boolFinDecider = ''.join(bBoolDecideFin)
+    if boolFinDecider.isdigit():
+        numFinal = boolDecide
+        lBool = eval(numFinal)
+        boolExec()
 
-        if 'WRITE' in finalExecution:
-            writeSequence = finalExecution.split('WRITE')
-            writeStringJoin = ''.join(writeSequence)
-            fWriteSequence = writeStringJoin.split('(')
-            o = ''.join(fWriteSequence)
-            fWrite = o.split(')')
-            finalWriter = ''.join(fWrite)
-            write(finalWriter)
+
+    elif '-INSIDE-' in finalCond:
+            bools.append(chars)
+            if '\n' in bools:
+                bools = []
+
+            lBoolSplitter = finalCond.split(' ')
+            lBoolcond_one = lBoolSplitter[1]
+            lBoolcond_two = lBoolSplitter[3]
+
+            if lBoolcond_one in lBoolcond_two:
+                lBool = 2 > 1
+
+
+                if lBool:
+                    boolExec()
+
+def boolExec():
+    writeFun = 2 > 1
+    execute = words.split('!')
+    exJoin = execute[2]
+    exFinal = exJoin.split('{')
+    exFi = ''.join(exFinal)
+    exFinale = exFi.split('}')
+    finalExecution = exFinale[0]
+    if 'WRITE' in finalExecution:
+        writeSequence = finalExecution.split('WRITE')
+        writeStringJoin = ''.join(writeSequence)
+        fWriteSequence = writeStringJoin.split('(')
+        o = ''.join(fWriteSequence)
+        fWrite = o.split(')')
+        finalWriter = ''.join(fWrite)
+        write(finalWriter)
         for everything in varDict:
             if everything in finalWriter:
                 write(varDict[everything])
-
-
-
-
-    else:
-        pass
 
 
 def writing():
@@ -182,8 +190,9 @@ def ui(userInput):
 
     prompt = input(userInput)
 
+
     varDict[finalPrompt[1]] = prompt
-    write(prompt)
+    #write(prompt)
     if '+' or '-' or '/' or '*' in prompt:
         evaluations()
 
