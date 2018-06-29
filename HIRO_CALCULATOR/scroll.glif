@@ -1,0 +1,15 @@
+
+WRITE(|HIRO_CALCLATOR|)
+WRITE(--------------)
+WRITE(|7    8    9 |)
+WRITE(-------------|)
+WRITE(|4    5    6 |)
+WRITE(-------------|)
+WRITE(|1    2    3 |)
+WRITE(-------------|)
+WRITE(|/    *      |)
+WRITE(-------------|)
+WRITE(|+    -    = |)
+WRITE(-------------|)
+UI(ENTER EQUATION)
+<BRK>
