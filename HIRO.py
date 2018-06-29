@@ -115,7 +115,6 @@ def boolStat():
             bools.append(chars)
             if '\n' in bools:
                 bools = []
-    print(bools)
 
 
     boolDecide = ''.join(bools)
