@@ -7,7 +7,7 @@ $ N VAR $=EXIT
 !IF( $^ NAME VAR ^$ @INSIDE@ $ N VAR $ )!{WRITE(GOODBYE!)}
 !IF( $ TEST VAR $ @INSIDE@ $ T VAR $ )!{WRITE(found 2ND test)}
 !IF( H @INSIDE@ HELLO )!{WRITE('found h')}
-!IF(# E VAR < 22)!{WRITE( $^ NAME VAR ^$ )}
+!IF(2 < 22)!{WRITE( $^ NAME VAR ^$ )}
 WRITE(# E VAR)
 <BRK>
 

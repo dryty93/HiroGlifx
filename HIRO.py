@@ -288,10 +288,11 @@ def uIOut():
     lPrompt = ''.join(fPrompt)
     fPromptW = lPrompt.split(')')
     finalPrompt = ''.join(fPromptW)
-    print('f')
     promptVar = finalPrompt.split('$=')
+    finPromptVar = ''.join(promptVar)
 
-    ui(promptVar[1])
+    ui(finPromptVar)
+
 
 
 loop = True
