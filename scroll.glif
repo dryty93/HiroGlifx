@@ -1,19 +1,13 @@
-# NEW VAR#= 200
-# MAIN VAR#= 54
-# MA VAR#= 2 + 2
-# NEXT VAR#= 5
-# N VAR#= 80
-$ N VAR$= 'also a string'
-$ M VAR$= 'WE LIKE'
-# H VAR#= 77
-# X VAR#= 400
-!IF( H -INSIDE- HELLO )!{WRITE('FOUND T')}
-!IF(4 > 8)!{WRITE( $ N VAR)}
-!IF( ww -INSIDE- HELLO )!{WRITE('FOUND W')}
-!IF(200 > 366 )!{WRITE(hi)}
-!IF(5000000 > 1000)!{WRITE('you did it')}
-!IF((# MAIN VAR) > (# NEXT VAR))!{WRITE('smart')}
-WRITE(# NEW VAR)
-!IF(3 < 1)!{WRITE(# NEW VAR)}
-!IF(5 > 100)!{WRITE('Hello World')}
+$^ NAME VAR ^$=UI(Welcome to HIROGLIFX. What is your name?)
+# E VAR #= 5
+$ TEST VAR $=H
+$ T VAR $=HELLO
+$ N VAR $=EXIT
+!IF( $ TEST VAR $ @INSIDE@ HELLO )!{WRITE(found 1ST test)}
+!IF( $^ NAME VAR ^$ @INSIDE@ $ N VAR $ )!{WRITE(GOODBYE!)}
+!IF( $ TEST VAR $ @INSIDE@ $ T VAR $ )!{WRITE(found 2ND test)}
+!IF( H @INSIDE@ HELLO )!{WRITE('found h')}
+!IF(# E VAR < 22)!{WRITE( $^ NAME VAR ^$ )}
+WRITE(# E VAR)
 <BRK>
+
