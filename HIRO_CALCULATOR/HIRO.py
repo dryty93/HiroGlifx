@@ -1,8 +1,7 @@
 from simpleLibrary import *
 
 functionLibrary = {}
-tokens = ['!', 'WRITE', '+', '!IF', '<', '>', '@INSIDE@', 'VAR', '(',
-          '(', ')']
+tokens = ['!', 'WRITE', '+', '!IF', '<', '>', '@INSIDE@', 'VAR',]
 expression = ['+', '-', '/', '*']
 inPut = []
 varDict = {}
@@ -21,7 +20,6 @@ def varSetter():
 
     for chars in tokens:
         w = words.split('VAR')
-        #print(w)
         wFuncs = words.split('WRITE')
         insideFunction = words.split('@INSIDE@')
         n = ' '.join(w)
@@ -117,43 +115,70 @@ def boolStat():
 
     bools = []
 
+    if 'VAR' and '<' in finalCond or 'VAR' and '>' in finalCond:
+        lBoolSplitL = finalCond.split('<')
+        lBoolSplitR = finalCond.split('>')
+        lBoolSplitLJoint = lBoolSplitL[0]
+        lBoolSplitRJoint = lBoolSplitR[0]
+
+        for everything in varDict:
+            if everything in lBoolSplitLJoint:
+                convertedKey = str(varDict[everything])
+                finalConvertedKey = convertedKey.split(' ')
+                finalConversionKey = ('').join(finalConvertedKey)
+                finalConvKeyReady = finalConversionKey.split("\n")
+                digAloneKey = ('').join(finalConvKeyReady[0])
+                digAloneFinalkey = digAloneKey.split('=')
+                digKeyF = ('').join(digAloneFinalkey)
+                lastConvKey = digKeyF.split('#')
+                digitKey = lastConvKey[1]
+                bools.append(digitKey)
+            elif everything in lBoolSplitRJoint:
+
+                convertedKey = str(varDict[everything])
+                finalConvertedKey = convertedKey.split(' ')
+                finalConversionKey = ('').join(finalConvertedKey)
+                finalConvKeyReady = finalConversionKey.split("\n")
+                digAloneKey = ('').join(finalConvKeyReady[0])
+                digAloneFinalkey = digAloneKey.split('=')
+                digKeyF = ('').join(digAloneFinalkey)
+                lastConvKey = digKeyF.split('#')
+                digitKey = lastConvKey[1]
+                bools.append(digitKey)
+
 
     for chars in finalCond:
         # put chars for digits as its own list and check the length
         # of the character.
-        if "$" or '#' in chars:
+        if chars.isdigit() or chars in tokens:
 
             bools.append(chars)
 
 
-
-        if chars.isdigit() or chars in tokens[:]:
-
-
-
-                bools.append(chars)
-
-                if '\n' in bools:
-                    bools = []
+    # i need to find variables and append their data to bools
 
     boolDecide = ''.join(bools)
     bareBoolDecide = boolDecide.split('<')
     boolJoin = ''.join(bareBoolDecide)
     bBoolDecideFin = boolJoin.split('>')
     boolFinDecider = ''.join(bBoolDecideFin)
-    newList = []
-
+    boolFinDecidersp = boolFinDecider.split('{')
 
     if boolFinDecider.isdigit():
         numFinal = boolDecide
-        lBool = eval(numFinal)
-        boolExec()
-    else:
-        pass
+        # this is supposed to check if the last char is a parenthesis
+        if numFinal[-1] in tokens or numFinal[-1] == ' ':
 
+            pass
 
+        else:
 
-    if '@INSIDE@' in finalCond:
+            lBool = eval(numFinal)
+
+            if lBool:
+                boolExec()
+
+    elif '@INSIDE@' in finalCond:
         bools.append(chars)
         if '\n' in bools:
             bools = []
@@ -164,6 +189,7 @@ def boolStat():
 
 
                 if lBoolcond_one in lBoolcond_two:
+
                     lBool = 2 > 1
                     if lBool:
                         boolExec()
@@ -172,7 +198,6 @@ def boolStat():
                 lBoolSplit = finalCond.split(' @INSIDE@')
                 lBoolcond_one = lBoolSplit[0]
                 lBoolcond_two_gen = lBoolSplit[1].split('{')
-
                 lBoolcond_two = lBoolcond_two_gen[0]
 
                 # needed so python recognizes var keys
@@ -231,7 +256,6 @@ def boolExec():
         for everything in varDict:
             if everything in finalSeq:
                 varDict[everything]
-                print('here', varDict[everything])
 
 def writing():
     # i likely will rewrite this so that it is more reusable for the entire project
@@ -247,7 +271,6 @@ def writing():
 
     for everything in varDict.keys():
         if everything in finalWriter:
-            write(everything)
             write(varDict[everything])
 
 def ui(userInput):
@@ -257,7 +280,9 @@ def ui(userInput):
     prompt = input(userInput)
     promptSplitter = prompt[:]
     varDict[promptVar[0]] = promptSplitter
-
+    for everything in varDict.values():
+        if everything in promptSplitter:
+            write(everything )
 
 
 
@@ -292,6 +317,7 @@ def uIOut():
     finPromptVar = ''.join(promptVar)
 
     ui(finPromptVar)
+
 
 
 loop = True
