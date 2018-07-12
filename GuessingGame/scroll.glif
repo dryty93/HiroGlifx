@@ -1,0 +1,10 @@
+$^ STATE VAR ^$=UI(Guess a number:)
+$ EX VAR $=EXIT
+$ ANS VAR $= 4
+# X VAR #= 8
+# N VAR #= 4+2
+WRITE(# N VAR #)
+!IF-NT(4 < 3)!{WRITE(OKKK)}
+!IF(4 >3)!{WRITE(OKeKK)}
+!IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{(<BRK>)}
+!IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{WRITE(4 IS CORRECT)}
