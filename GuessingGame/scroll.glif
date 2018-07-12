@@ -3,4 +3,6 @@ $ EX VAR $=EXIT
 $ ANS VAR $=4
 !IF-NT(4 < 3)!{WRITE(OKKK)}
 !IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{(<BRK>)}
-!IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{WRITE(4 IS CORRECT)}
+!IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{WRITE(CORRECT)}
+!IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{(<BRK>)}
+
