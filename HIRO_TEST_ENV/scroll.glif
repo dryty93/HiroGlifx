@@ -8,9 +8,9 @@ $ M VAR$= 'WE LIKE'
 # H VAR#= 77
 # X VAR#= 400
 ^ INP VAR^= UI('What is your name?')
-!IF( H -INSIDE- HELLO )!{WRITE('FOUND T')}
+!IF( H @INSIDE@ HELLO )!{WRITE('FOUND T')}
 !IF(4 < 8)!{WRITE( $ N VAR)}
-!IF( ww -INSIDE- HELLO )!{WRITE('FOUND W')}
+!IF( ww @INSIDE@ HELLO )!{WRITE('FOUND W')}
 !IF(200 > 366 )!{WRITE(hi)}
 !IF(5000000 > 1000)!{WRITE('you did it')}
 !IF(# MAIN VAR > # NEXT VAR )!{WRITE('smart')}

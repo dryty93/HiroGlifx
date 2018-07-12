@@ -1,7 +1,7 @@
 from simpleLibrary import *
 
 functionLibrary = {}
-tokens = ['!', 'WRITE', '+', '!IF', '<', '>', '@INSIDE@', 'VAR',]
+tokens = ['!', 'WRITE', '+', '!IF', 'ELSE', '<', '>', '@INSIDE@', 'VAR',]
 expression = ['+', '-', '/', '*']
 inPut = []
 varDict = {}
@@ -11,6 +11,13 @@ numList = []
 stringList = []
 n = {}
 bools = []
+
+def boolSep(string):
+    """This seperates booleans based on < or >"""
+    stringSplitL = string.split('<')
+    stringSplitR = string.split('>')
+    stringSplitLJoint = stringSplitL[0]
+    stringSplitRJoint = stringSplitR[0]
 
 
 def varSetter():
@@ -106,6 +113,8 @@ def boolStat():
     global lBool
     global finalCond
     global finalExecution
+    bools = []
+
 
     cond = words.split('!IF(')
     condJoiner = ''.join(cond)
@@ -113,38 +122,42 @@ def boolStat():
     finalCond = ''.join(condJoinerN)
 
 
-    bools = []
 
-    if 'VAR' and '<' in finalCond or 'VAR' and '>' in finalCond:
-        lBoolSplitL = finalCond.split('<')
-        lBoolSplitR = finalCond.split('>')
-        lBoolSplitLJoint = lBoolSplitL[0]
-        lBoolSplitRJoint = lBoolSplitR[0]
+    if '<BRK>' not in finalCond:
 
-        for everything in varDict:
-            if everything in lBoolSplitLJoint:
-                convertedKey = str(varDict[everything])
-                finalConvertedKey = convertedKey.split(' ')
-                finalConversionKey = ('').join(finalConvertedKey)
-                finalConvKeyReady = finalConversionKey.split("\n")
-                digAloneKey = ('').join(finalConvKeyReady[0])
-                digAloneFinalkey = digAloneKey.split('=')
-                digKeyF = ('').join(digAloneFinalkey)
-                lastConvKey = digKeyF.split('#')
-                digitKey = lastConvKey[1]
-                bools.append(digitKey)
-            elif everything in lBoolSplitRJoint:
+        if 'VAR' and '<' in finalCond or 'VAR' and '>' in finalCond:
+            lBoolSplitL = finalCond.split('<')
+            lBoolSplitR = finalCond.split('>')
+            lBoolSplitLJoint = lBoolSplitL[0]
+            lBoolSplitRJoint = lBoolSplitR[0]
 
-                convertedKey = str(varDict[everything])
-                finalConvertedKey = convertedKey.split(' ')
-                finalConversionKey = ('').join(finalConvertedKey)
-                finalConvKeyReady = finalConversionKey.split("\n")
-                digAloneKey = ('').join(finalConvKeyReady[0])
-                digAloneFinalkey = digAloneKey.split('=')
-                digKeyF = ('').join(digAloneFinalkey)
-                lastConvKey = digKeyF.split('#')
-                digitKey = lastConvKey[1]
-                bools.append(digitKey)
+
+
+
+            for everything in varDict:
+                if everything in lBoolSplitLJoint:
+                    convertedKey = str(varDict[everything])
+                    finalConvertedKey = convertedKey.split(' ')
+                    finalConversionKey = ('').join(finalConvertedKey)
+                    finalConvKeyReady = finalConversionKey.split("\n")
+                    digAloneKey = ('').join(finalConvKeyReady[0])
+                    digAloneFinalkey = digAloneKey.split('=')
+                    digKeyF = ('').join(digAloneFinalkey)
+                    lastConvKey = digKeyF.split('#')
+                    digitKey = lastConvKey[1]
+                    bools.append(digitKey)
+                elif everything in lBoolSplitRJoint:
+
+                    convertedKey = str(varDict[everything])
+                    finalConvertedKey = convertedKey.split(' ')
+                    finalConversionKey = ('').join(finalConvertedKey)
+                    finalConvKeyReady = finalConversionKey.split("\n")
+                    digAloneKey = ('').join(finalConvKeyReady[0])
+                    digAloneFinalkey = digAloneKey.split('=')
+                    digKeyF = ('').join(digAloneFinalkey)
+                    lastConvKey = digKeyF.split('#')
+                    digitKey = lastConvKey[1]
+                    bools.append(digitKey)
 
 
     for chars in finalCond:
@@ -155,14 +168,12 @@ def boolStat():
             bools.append(chars)
 
 
-    # i need to find variables and append their data to bools
 
     boolDecide = ''.join(bools)
     bareBoolDecide = boolDecide.split('<')
     boolJoin = ''.join(bareBoolDecide)
     bBoolDecideFin = boolJoin.split('>')
     boolFinDecider = ''.join(bBoolDecideFin)
-    boolFinDecidersp = boolFinDecider.split('{')
 
     if boolFinDecider.isdigit():
         numFinal = boolDecide
@@ -174,9 +185,9 @@ def boolStat():
         else:
 
             lBool = eval(numFinal)
-
             if lBool:
                 boolExec()
+
 
     elif '@INSIDE@' in finalCond:
         bools.append(chars)
@@ -244,6 +255,16 @@ def boolExec():
         for everything in varDict:
             if everything in finalWriter:
                 write(varDict[everything])
+
+    if '<BRK>' in finalExecution:
+
+        breakSeq = finalExecution.split('<BRK>')
+        breakJoin = ''.join(breakSeq)
+        fBreakSeq = breakJoin.split('(')
+        b = ''.join(fBreakSeq)
+        fbreak = b.split(')')
+        finalBreak = ''.join(fbreak)
+        exit()
 
     if '@INSIDE@' in finalExecution:
         insideSeq = finalExecution.split('@INSIDE@')
@@ -315,8 +336,10 @@ def uIOut():
     finalPrompt = ''.join(fPromptW)
     promptVar = finalPrompt.split('$=')
     finPromptVar = ''.join(promptVar)
+    dividerPrompt = finPromptVar.split('^')
+    last = dividerPrompt[-1]
 
-    ui(finPromptVar)
+    ui(last)
 
 
 
@@ -327,8 +350,7 @@ while loop:
         for words in readFile:
             inPut.append(words)
 
-            if '<BRK>' in words:
-                loop = False
+
 
             if '//' in words:
                 comment()

@@ -1,3 +1,6 @@
+$^ STATE VAR ^$=UI( ENTER EQUATION)
+$ EX VAR $=EXIT
+!IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{<BRK>)}
 WRITE(|HIRO_CALCLATOR|)
 WRITE(--------------)
 WRITE(|7    8    9 |)
@@ -10,4 +13,3 @@ WRITE(|/    *      |)
 WRITE(-------------|)
 WRITE(|+    -    = |)
 WRITE(-------------|)
-UI(ENTER EQUATION)
