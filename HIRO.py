@@ -1,5 +1,5 @@
 from simpleLibrary import *
-
+from random import randrange
 functionLibrary = {}
 tokens = ['!', 'WRITE', '+', '!IF', 'ELSE', '<', '>', '@INSIDE@', 'VAR',]
 expression = ['+', '-', '/', '*']
@@ -108,6 +108,19 @@ def comment():
     pass
 
 
+def RANDOM():
+    if 'RAND5' in words:
+        randomVar = str(randrange(1,5))
+    varDict[str(w[0])] = randomVar
+
+    if 'RAND10' in words:
+        varDict[str(w[0])] = str(randrange(1, 10))
+    elif 'RAND100' in words:
+        varDict[str(w[0])] = str(randrange(1, 100))
+
+
+
+
 def boolStat():
     # commands for conditional operators
     global lBool
@@ -132,8 +145,6 @@ def boolStat():
             lBoolSplitRJoint = lBoolSplitR[0]
 
 
-
-
             for everything in varDict:
                 if everything in lBoolSplitLJoint:
                     convertedKey = str(varDict[everything])
@@ -143,9 +154,16 @@ def boolStat():
                     digAloneKey = ('').join(finalConvKeyReady[0])
                     digAloneFinalkey = digAloneKey.split('=')
                     digKeyF = ('').join(digAloneFinalkey)
-                    lastConvKey = digKeyF.split('#')
-                    digitKey = lastConvKey[1]
-                    bools.append(digitKey)
+                    if '#' in digKeyF:
+                        lastConvKey = digKeyF.split('#')
+                        digitKey = lastConvKey[1]
+                        bools.append(digitKey)
+
+                    elif digKeyF.isdigit():
+
+                        bools.append(digKeyF)
+
+
                 elif everything in lBoolSplitRJoint:
 
                     convertedKey = str(varDict[everything])
@@ -155,9 +173,13 @@ def boolStat():
                     digAloneKey = ('').join(finalConvKeyReady[0])
                     digAloneFinalkey = digAloneKey.split('=')
                     digKeyF = ('').join(digAloneFinalkey)
-                    lastConvKey = digKeyF.split('#')
-                    digitKey = lastConvKey[1]
-                    bools.append(digitKey)
+
+
+                    if '#' in digKeyF:
+                        lastConvKey = digKeyF.split('#')
+                        digitKey = lastConvKey[1]
+                        bools.append(digitKey)
+
 
 
     for chars in finalCond:
@@ -166,7 +188,6 @@ def boolStat():
         if chars.isdigit() or chars in tokens:
 
             bools.append(chars)
-
 
 
     boolDecide = ''.join(bools)
@@ -300,10 +321,14 @@ def ui(userInput):
 
     prompt = input(userInput)
     promptSplitter = prompt[:]
-    varDict[promptVar[0]] = promptSplitter
+    varDict[promptVar[0]] = prompt
+
+
     for everything in varDict.values():
+
+
         if everything in promptSplitter:
-            write(everything )
+            write(everything)
 
 
 
@@ -374,3 +399,6 @@ while loop:
 
             if words.isdigit():
                 intSet()
+
+            if 'RAND' in words:
+                RANDOM()
