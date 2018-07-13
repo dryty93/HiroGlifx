@@ -1,8 +1,9 @@
 $^ STATE VAR ^$=UI(Guess a number:)
 $ EX VAR $=EXIT
-$ ANS VAR $=4
-!IF-NT(4 < 3)!{WRITE(OKKK)}
+$ ANS VAR $=RAND5
 !IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{(<BRK>)}
 !IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{WRITE(CORRECT)}
 !IF( $^ STATE VAR ^$ @INSIDE@ $ ANS VAR $ )!{(<BRK>)}
+WRITE(Wrong Answer. TRY AGAIN)
+
 
