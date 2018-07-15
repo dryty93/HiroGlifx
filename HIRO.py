@@ -122,11 +122,17 @@ def RANDOM():
 
 
 def boolStat():
-    # commands for conditional operators
+    '''Checks for if conditions and if not conditions
+    and passes the data collected to bool Execution.'''
+
+
     global lBool
     global finalCond
+    global finalCond
     global finalExecution
+    global finalnonCond
     bools = []
+    nons = []
 
 
     cond = words.split('!IF(')
@@ -134,6 +140,14 @@ def boolStat():
     condJoinerN = condJoiner.split(')!')
     finalCond = ''.join(condJoinerN)
 
+    if 'IF-NOT' in words:
+
+        noncond = words.split('!IF-NOT(')
+        noncondJoin = ''.join(noncond)
+        finalnonSplit = noncondJoin.split(')!')
+        finalnonCond = finalnonSplit[0]
+        bools.append(finalnonCond)
+        nons.append(finalnonCond)
 
 
     if '<BRK>' not in finalCond:
@@ -188,13 +202,24 @@ def boolStat():
         if chars.isdigit() or chars in tokens:
 
             bools.append(chars)
-
-
     boolDecide = ''.join(bools)
     bareBoolDecide = boolDecide.split('<')
     boolJoin = ''.join(bareBoolDecide)
     bBoolDecideFin = boolJoin.split('>')
     boolFinDecider = ''.join(bBoolDecideFin)
+    #nonsnum checks for negation in bools
+    nonsNum = len(nons)
+
+    if nonsNum > 0:
+        numFinal = finalnonCond
+            # this is supposed to check if the last char is a parenthesis
+        if numFinal[-1] in tokens or numFinal[-1] == ' ':
+            pass
+
+        else:
+            lBool = eval(numFinal)
+            if not lBool:
+                boolExec()
 
     if boolFinDecider.isdigit():
         numFinal = boolDecide
@@ -206,8 +231,9 @@ def boolStat():
         else:
 
             lBool = eval(numFinal)
+
             if lBool:
-                boolExec()
+                 boolExec()
 
 
     elif '@INSIDE@' in finalCond:
@@ -256,6 +282,7 @@ def boolStat():
 
 
 def boolExec():
+    """Checks the bool condition for functions or known keywords and executes them"""
 
     writeFun = 2 > 1
     execute = words.split('!')
