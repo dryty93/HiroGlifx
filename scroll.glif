@@ -4,16 +4,22 @@ $^ NAME VAR ^$=UI(Welcome to HIROGLIFX. What is your name?)
 $ TEST VAR $=H
 $ T VAR $=HELLO
 $ EX VAR $=EXIT
+# K VAR #=RAND5
+DEF NEW {WRITE(This is a premature function) }
+WRITE( # K VAR #)
+!IF-NOT( 9 < 5)!{WRITE(found)}
+!IF-NOT( 200 < 1)!{WRITE(HELLO)}
 !IF( $ TEST VAR $ @INSIDE@ HELLO )!{WRITE(found 1ST test)}
-!IF( $^ NAME VAR ^$ @INSIDE@ $ EX VAR $ )!{WRITE(GOODBYE)}
+!IF( $^ NAME VAR ^$ @INSIDE@ $ EX VAR $ )!{(<BRK>)}
 !IF( $ TEST VAR $ @INSIDE@ $ T VAR $ )!{WRITE(found 2ND test)}
 !IF( H @INSIDE@ HELLO )!{WRITE('found h')}
 !IF(7 < 222)!{WRITE(LESS )}
-!IF(# E VAR < 2)!{WRITE(LESyS )}
-!IF(# N VAR < 333)!{WRITE(now it works )}
+!IF( # E VAR < 2)!{WRITE(LESyS )}
+!IF-NOT(4 < 2)!{WRITE(LESyS )}
+!IF(# N VAR < # K VAR )!{WRITE(now it works )}
 !IF(333 < # N VAR)!{WRITE(now )}
-<BRK>
 !IF(222 < 555555555)!{WRITE(LE )}
 WRITE(# E VAR)
+DEF NEW{WRITE(Wrong)}
 <BRK>
 
