@@ -1,16 +1,20 @@
 from simpleLibrary import *
 from random import randrange
+
 functionLibrary = {}
-tokens = ['!', 'WRITE', '+', '!IF', 'ELSE', '<', '>', '@INSIDE@', 'VAR',]
+tokens = ['!', 'WRITE', '+', '!IF', 'ELSE', '<', '>', '@INSIDE@', 'VAR','!IF-NOT', 'UI','DEF']
 expression = ['+', '-', '/', '*']
 inPut = []
 varDict = {}
+functDict = {}
 isString = False
 isInt = False
 numList = []
 stringList = []
 n = {}
 bools = []
+randomList = []
+
 
 def boolSep(string):
     """This seperates booleans based on < or >"""
@@ -23,17 +27,21 @@ def boolSep(string):
 def varSetter():
     global w
     global insideFunction
+    global chars
 
 
     for chars in tokens:
         w = words.split('VAR')
         wFuncs = words.split('WRITE')
         insideFunction = words.split('@INSIDE@')
+        uIFuncs = words.split('UI')
         n = ' '.join(w)
         rawValFunct = n.split('(')
 
         if chars not in w:
-            if '#' or '$' or '^' in chars:
+
+            if '#' or '$' in chars:
+
                 varDict[str(w[0])] = str(w[-1])
 
 
@@ -70,7 +78,7 @@ def intSet():
         summ = eval(finalOp)
         varDict[str(w[0])] = summ
 
-    if '-' in words:
+    if '-'  in words and '!' not in words:
         operation = words.split('=')
         join = ''.join(operation)
         opNow = join.split('#')
@@ -102,23 +110,53 @@ def stringSet():
 
 
 def comment():
-    if not '//' in words:
-        pass
+    if  '/*' in words:
+        commentS = words.split('/*')
+        commentS =str(commentS[1].split('/'))
+        commentS = commentS[0]
+        commentS = False
 
-    pass
+def randFive():
+    global rightRand
+    global randomVarF
 
+    randomVar = str(randrange(1, 6))
+    randomList.append(randomVar)
+    randomVarF = str(randomList[0])
+    leftRand = str(w[0])
+    rightRand = str(w[-1])
+
+    #if '=' not in rightRand:
+    varDict[str(w[0])] = randomVarF
+
+
+def randTen():
+    randomVar = str(randrange(1, 11))
+    randomList.append(randomVar)
+    randomVarF = str(randomList[0])
+    varDict[str(w[0])] = randomVarF
+
+def randHun():
+    randomVar = str(randrange(1, 101))
+    randomList.append(randomVar)
+    randomVarF = str(randomList[0])
+    varDict[str(w[0])] = randomVarF
 
 def RANDOM():
+    '''Creates random ranges in increments of 1-5, 1-10 and 1-100'''
+    global randomList
+    global randomVarF
+
+
     if 'RAND5' in words:
-        randomVar = str(randrange(1,5))
-    varDict[str(w[0])] = randomVar
+        randFive()
 
-    if 'RAND10' in words:
-        varDict[str(w[0])] = str(randrange(1, 10))
+
+    elif 'RAND10' in words:
+        randTen()
+
     elif 'RAND100' in words:
-        varDict[str(w[0])] = str(randrange(1, 100))
-
-
+        randHun()
 
 
 def boolStat():
@@ -131,6 +169,8 @@ def boolStat():
     global finalCond
     global finalExecution
     global finalnonCond
+    global lBoolSplitLJoint
+    global lBoolSplitRJoint
     bools = []
     nons = []
 
@@ -157,44 +197,13 @@ def boolStat():
             lBoolSplitR = finalCond.split('>')
             lBoolSplitLJoint = lBoolSplitL[0]
             lBoolSplitRJoint = lBoolSplitR[0]
-
-
-            for everything in varDict:
-                if everything in lBoolSplitLJoint:
-                    convertedKey = str(varDict[everything])
-                    finalConvertedKey = convertedKey.split(' ')
-                    finalConversionKey = ('').join(finalConvertedKey)
-                    finalConvKeyReady = finalConversionKey.split("\n")
-                    digAloneKey = ('').join(finalConvKeyReady[0])
-                    digAloneFinalkey = digAloneKey.split('=')
-                    digKeyF = ('').join(digAloneFinalkey)
-                    if '#' in digKeyF:
-                        lastConvKey = digKeyF.split('#')
-                        digitKey = lastConvKey[1]
-                        bools.append(digitKey)
-
-                    elif digKeyF.isdigit():
-
-                        bools.append(digKeyF)
-
-
-                elif everything in lBoolSplitRJoint:
-
-                    convertedKey = str(varDict[everything])
-                    finalConvertedKey = convertedKey.split(' ')
-                    finalConversionKey = ('').join(finalConvertedKey)
-                    finalConvKeyReady = finalConversionKey.split("\n")
-                    digAloneKey = ('').join(finalConvKeyReady[0])
-                    digAloneFinalkey = digAloneKey.split('=')
-                    digKeyF = ('').join(digAloneFinalkey)
-
-
-                    if '#' in digKeyF:
-                        lastConvKey = digKeyF.split('#')
-                        digitKey = lastConvKey[1]
-                        bools.append(digitKey)
-
-
+            conversion()
+        elif 'VAR' and '<' in finalnonCond or 'VAR' and '>' in finalnonCond:
+            lBoolSplitL = finalCond.split('<')
+            lBoolSplitR = finalCond.split('>')
+            lBoolSplitLJoint = lBoolSplitL[0]
+            lBoolSplitRJoint = lBoolSplitR[0]
+            conversion()
 
     for chars in finalCond:
         # put chars for digits as its own list and check the length
@@ -202,6 +211,8 @@ def boolStat():
         if chars.isdigit() or chars in tokens:
 
             bools.append(chars)
+
+
     boolDecide = ''.join(bools)
     bareBoolDecide = boolDecide.split('<')
     boolJoin = ''.join(bareBoolDecide)
@@ -209,28 +220,60 @@ def boolStat():
     boolFinDecider = ''.join(bBoolDecideFin)
     #nonsnum checks for negation in bools
     nonsNum = len(nons)
+    nonList = []
 
     if nonsNum > 0:
-        numFinal = finalnonCond
-            # this is supposed to check if the last char is a parenthesis
-        if numFinal[-1] in tokens or numFinal[-1] == ' ':
-            pass
+        if 'VAR' in finalnonCond:
 
-        else:
-            lBool = eval(numFinal)
-            if not lBool:
-                boolExec()
+            finalnL = finalnonCond.split('>')
+            finalnR = finalnonCond.split('<')
+            finalnEq = finalnonCond.split('==')
+            fnjoin = ''.join(finalnL)
+            for everything in varDict:
+                if everything in finalnL[0] or everything in finalnL[-1]:
+                   # print(everything)
+                    nonList.append(everything)
+                   # print(nonList,'nonlsi')
+                    if len(nonList) > 2:
+                        nonList.pop(0)
+                    for no in nonList:
+                        if everything == no:
+                         pass #   varDict[no]
+
+
+                   # fin = varDict[one] + '>' + varDict[two]
+                    #numFinal = fin
+                    #print(numFinal)
+
+
+
+
+                  #  print(numFinal,'nf')
+
+
+                      #   this is supposed to check if the last char is a parenthesis
+                   # if numFinal[-1] in tokens or numFinal[-1] == ' ':
+                    #    pass
+
+                   # else:
+                    #    lBool = eval(numFinal)
+                     #   if not lBool:
+                      #      boolExec()
 
     if boolFinDecider.isdigit():
         numFinal = boolDecide
+        #print(numFinal,'nf')
         # this is supposed to check if the last char is a parenthesis
         if numFinal[-1] in tokens or numFinal[-1] == ' ':
+            #print(numFinal)
 
             pass
 
         else:
 
             lBool = eval(numFinal)
+
+
 
             if lBool:
                  boolExec()
@@ -281,8 +324,51 @@ def boolStat():
                                 boolExec()
 
 
+def conversion():
+    for everything in varDict:
+
+        if everything in lBoolSplitLJoint:
+            convertedKey = str(varDict[everything])
+            finalConvertedKey = convertedKey.split(' ')
+            finalConversionKey = ('').join(finalConvertedKey)
+            finalConvKeyReady = finalConversionKey.split("\n")
+            digAloneKey = ('').join(finalConvKeyReady[0])
+            digAloneFinalkey = digAloneKey.split('=')
+            digKeyF = ('').join(digAloneFinalkey)
+            if '#' in digKeyF:
+                lastConvKey = digKeyF.split('#')
+                digitKey = lastConvKey[1]
+                bools.append(digitKey)
+
+            elif digKeyF.isdigit():
+
+                bools.append(digKeyF)
+
+
+
+        elif everything in lBoolSplitRJoint:
+
+            convertedKey = str(varDict[everything])
+            finalConvertedKey = convertedKey.split(' ')
+            finalConversionKey = ('').join(finalConvertedKey)
+            finalConvKeyReady = finalConversionKey.split("\n")
+            digAloneKey = ('').join(finalConvKeyReady[0])
+            digAloneFinalkey = digAloneKey.split('=')
+            digKeyF = ('').join(digAloneFinalkey)
+
+            if '#' in digKeyF:
+                lastConvKey = digKeyF.split('#')
+                digitKey = lastConvKey[1]
+                bools.append(digitKey)
+
+            elif digKeyF.isdigit():
+
+                bools.append(digKeyF)
+
+
 def boolExec():
     """Checks the bool condition for functions or known keywords and executes them"""
+    global valueAssign
 
     writeFun = 2 > 1
     execute = words.split('!')
@@ -326,29 +412,59 @@ def boolExec():
             if everything in finalSeq:
                 varDict[everything]
 
+    if "=" in finalExecution:
+        asignPre = finalExecution.split('=')
+        valueAssign = str(asignPre[-1])
+        varAssign = str(asignPre[0])
+        print(valueAssign,'va')
+        if 'RAND5' in valueAssign:
+             randFive()
+
+        else:
+            varDict[varAssign] = valueAssign
+
+
+   #     for everything in varDict:
+  #          if everything in finalExecution:
+ #               print(everything,'er')
+#                varDict[everything]
+
 def writing():
     # i likely will rewrite this so that it is more reusable for the entire project
     #  because i find myself repeating this same code with little differences for all functions
     #  within the code.
+    global eFinale
+    global writeSequence
+
     writeSequence = words.split('WRITE')
     writeStringJoin = ''.join(writeSequence)
     fWriteSequence = writeStringJoin.split('(')
     o = ''.join(fWriteSequence)
     fWrite = o.split(')')
+
+
     finalWriter = ''.join(fWrite)
-    write(finalWriter)
 
     for everything in varDict.keys():
-        if everything in finalWriter:
-            write(varDict[everything])
+        if everything in finalWriter and '^' not in finalWriter:
+
+
+            print(varDict[everything])
+    if '^' in finalWriter:
+        print(prompt)
 
 def ui(userInput):
     global prompt
     global promptVal
-
+    global promptVar
+    global prompted
     prompt = input(userInput)
     promptSplitter = prompt[:]
-    varDict[promptVar[0]] = prompt
+    prompted = promptVar[0]
+    varDict[prompted] = prompt
+
+
+
 
 
     for everything in varDict.values():
@@ -380,6 +496,7 @@ def uIOut():
     global promptVar
     global uiAnswer
 
+
     promptSeq = words.split('UI')
     promptJOin = ''.join(promptSeq)
     fPrompt = promptJOin.split('(')
@@ -393,18 +510,23 @@ def uIOut():
 
     ui(last)
 
-
+def createFunct(funcName, funcProp):
+    if 'WRITE' in funcProp:
+        writeNow = funcProp
+        writeSplit = writeNow.split('(')
+        writeSplitter = writeSplit[1].split(')')
+        writeFunEx = ''.join(writeSplitter)
+        print(writeFunEx)
+    if 'VAR' in funcProp:
+        varSetter()
 
 loop = True
-
 while loop:
     with open('scroll.glif', 'r') as readFile:
         for words in readFile:
             inPut.append(words)
 
-
-
-            if '//' in words:
+            if '/*' in words:
                 comment()
 
             if 'XX' in words:
@@ -412,6 +534,7 @@ while loop:
 
             if 'VAR' in words:
                 varSetter()
+                #print(varDict)
 
             if '!' in words:
                 boolStat()
@@ -429,3 +552,10 @@ while loop:
 
             if 'RAND' in words:
                 RANDOM()
+
+            if 'DEF' in words:
+                funcSplit = words.split('{')
+                funcExec = funcSplit[1].split('}')
+                functName = words.split(' ')[1]
+                # print(functName,'fwe')
+                createFunct(functName, funcExec[0])
