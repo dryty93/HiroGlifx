@@ -41,6 +41,7 @@ def varSetter():
         if chars not in w:
 
             if '#' or '$' in chars:
+                vVal = str(w[-1])
 
                 varDict[str(w[0])] = str(w[-1])
 
@@ -197,13 +198,45 @@ def boolStat():
             lBoolSplitR = finalCond.split('>')
             lBoolSplitLJoint = lBoolSplitL[0]
             lBoolSplitRJoint = lBoolSplitR[0]
-            conversion()
-        elif 'VAR' and '<' in finalnonCond or 'VAR' and '>' in finalnonCond:
-            lBoolSplitL = finalCond.split('<')
-            lBoolSplitR = finalCond.split('>')
-            lBoolSplitLJoint = lBoolSplitL[0]
-            lBoolSplitRJoint = lBoolSplitR[0]
-            conversion()
+            for everything in varDict:
+
+                if everything in lBoolSplitLJoint:
+                    convertedKey = str(varDict[everything])
+                    finalConvertedKey = convertedKey.split(' ')
+                    finalConversionKey = ('').join(finalConvertedKey)
+                    finalConvKeyReady = finalConversionKey.split("\n")
+                    digAloneKey = ('').join(finalConvKeyReady[0])
+                    digAloneFinalkey = digAloneKey.split('=')
+                    digKeyF = ('').join(digAloneFinalkey)
+                    if '#' in digKeyF:
+                        lastConvKey = digKeyF.split('#')
+                        digitKey = lastConvKey[1]
+                        bools.append(digitKey)
+
+                    elif digKeyF.isdigit():
+
+                        bools.append(digKeyF)
+
+
+
+                elif everything in lBoolSplitRJoint:
+
+                    convertedKey = str(varDict[everything])
+                    finalConvertedKey = convertedKey.split(' ')
+                    finalConversionKey = ('').join(finalConvertedKey)
+                    finalConvKeyReady = finalConversionKey.split("\n")
+                    digAloneKey = ('').join(finalConvKeyReady[0])
+                    digAloneFinalkey = digAloneKey.split('=')
+                    digKeyF = ('').join(digAloneFinalkey)
+
+                    if '#' in digKeyF:
+                        lastConvKey = digKeyF.split('#')
+                        digitKey = lastConvKey[1]
+                        bools.append(digitKey)
+
+                    elif digKeyF.isdigit():
+
+                        bools.append(digKeyF)
 
     for chars in finalCond:
         # put chars for digits as its own list and check the length
@@ -223,42 +256,46 @@ def boolStat():
     nonList = []
 
     if nonsNum > 0:
-        if 'VAR' in finalnonCond:
+
+        if 'VAR' not in finalnonCond:
+            numFinal = finalnonCond
+            if numFinal[-1] in tokens or numFinal[-1] == ' ':
+                pass
+
+            else:
+                lBool = eval(numFinal)
+                if not lBool:
+                    boolExec()
+
+        elif 'VAR' in finalnonCond:
 
             finalnL = finalnonCond.split('>')
+            char = finalnonCond.split(' ')
+            char = char[5]
+            finalnonL = finalnL[0]
+            finalnonR = finalnL[-1]
             finalnR = finalnonCond.split('<')
+            finalnonRE = finalnR[0]
+            finalnonLE = finalnR[-1]
             finalnEq = finalnonCond.split('==')
             fnjoin = ''.join(finalnL)
             for everything in varDict:
-                if everything in finalnL[0] or everything in finalnL[-1]:
-                   # print(everything)
-                    nonList.append(everything)
-                   # print(nonList,'nonlsi')
-                    if len(nonList) > 2:
-                        nonList.pop(0)
-                    for no in nonList:
-                        if everything == no:
-                         pass #   varDict[no]
+                if everything in finalnonL or everything in finalnonR:
 
-
-                   # fin = varDict[one] + '>' + varDict[two]
-                    #numFinal = fin
-                    #print(numFinal)
+                    if varDict[everything].isdigit():
+                        nonList.append(varDict[everything])
+                        nonList.append(char)
 
 
 
+                    if len(nonList) > 3:
+                        nonList.pop(-1)
+                        finalnonCond = nonList[0] + nonList[1] + nonList[2]
+                        numFinal = finalnonCond
 
-                  #  print(numFinal,'nf')
-
-
-                      #   this is supposed to check if the last char is a parenthesis
-                   # if numFinal[-1] in tokens or numFinal[-1] == ' ':
-                    #    pass
-
-                   # else:
-                    #    lBool = eval(numFinal)
-                     #   if not lBool:
-                      #      boolExec()
+                        lBool = eval(numFinal)
+                        if not lBool:
+                            boolExec()
 
     if boolFinDecider.isdigit():
         numFinal = boolDecide
@@ -323,47 +360,6 @@ def boolStat():
                             if lBool:
                                 boolExec()
 
-
-def conversion():
-    for everything in varDict:
-
-        if everything in lBoolSplitLJoint:
-            convertedKey = str(varDict[everything])
-            finalConvertedKey = convertedKey.split(' ')
-            finalConversionKey = ('').join(finalConvertedKey)
-            finalConvKeyReady = finalConversionKey.split("\n")
-            digAloneKey = ('').join(finalConvKeyReady[0])
-            digAloneFinalkey = digAloneKey.split('=')
-            digKeyF = ('').join(digAloneFinalkey)
-            if '#' in digKeyF:
-                lastConvKey = digKeyF.split('#')
-                digitKey = lastConvKey[1]
-                bools.append(digitKey)
-
-            elif digKeyF.isdigit():
-
-                bools.append(digKeyF)
-
-
-
-        elif everything in lBoolSplitRJoint:
-
-            convertedKey = str(varDict[everything])
-            finalConvertedKey = convertedKey.split(' ')
-            finalConversionKey = ('').join(finalConvertedKey)
-            finalConvKeyReady = finalConversionKey.split("\n")
-            digAloneKey = ('').join(finalConvKeyReady[0])
-            digAloneFinalkey = digAloneKey.split('=')
-            digKeyF = ('').join(digAloneFinalkey)
-
-            if '#' in digKeyF:
-                lastConvKey = digKeyF.split('#')
-                digitKey = lastConvKey[1]
-                bools.append(digitKey)
-
-            elif digKeyF.isdigit():
-
-                bools.append(digKeyF)
 
 
 def boolExec():
@@ -520,8 +516,21 @@ def createFunct(funcName, funcProp):
     if 'VAR' in funcProp:
         varSetter()
 
+def iterHold():
+    global loopNum
+    global w
+
+    ln = str(loopNum)
+
+    w = ('').join(w[0])
+
+   # w = w.split('(')
+    varDict[w] = ln
+
 loop = True
+loopNum = 0
 while loop:
+    loopNum += 1
     with open('scroll.glif', 'r') as readFile:
         for words in readFile:
             inPut.append(words)
@@ -529,12 +538,16 @@ while loop:
             if '/*' in words:
                 comment()
 
+
+
             if 'XX' in words:
                 stringCut(words, words)
 
             if 'VAR' in words:
                 varSetter()
-                #print(varDict)
+
+            if 'LN' in words:
+                iterHold()
 
             if '!' in words:
                 boolStat()
