@@ -4,18 +4,16 @@ $ INTER VAR $=i
 $ ADVAN VAR $= a
 $^ STATE VAR ^$=UI(Guess a number:)
 # ANS VAR #=RAND5
+# A VAR #=LN
 $ EX VAR $= EXIT
-/*
-The IF-NOT keyword does not properly work on variables yet
-/
-!IF-NOT( $^ STATE VAR ^$ > # ANS VAR # )!{WRITE(Your guess is too high)}
-!IF-NOT( $^ STATE VAR ^$ < # ANS VAR # )!{WRITE(Your guess is too low )}
-!IF(666 > 4 )!{WRITE(more )}
+!IF-NOT( $^ STATE VAR ^$ == # ANS VAR # )!{WRITE(WRONG ANSWER)}
+!IF-NOT( $^ STATE VAR ^$ >= # ANS VAR # )!{WRITE(Your guess is too low).}
+!IF-NOT( $^ STATE VAR ^$ <= # ANS VAR # )!{WRITE(Your guess is too high)}
 !IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{WRITE(GOODBYE)}
-!IF-NOT(4 < 2)!{WRITE(l )}
 !IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{<BRK>}
-WRITE(Wrong Answer)
 !IF( $^ STATE VAR ^$ @INSIDE@ # ANS VAR # )!{WRITE(CORRECT)}
 !IF( $^ STATE VAR ^$ @INSIDE@ # ANS VAR # )!{<BRK>}
+
+
 
 
