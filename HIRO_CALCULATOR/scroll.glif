@@ -1,15 +1,18 @@
-$^ STATE VAR ^$=UI( ENTER EQUATION)
-$ EX VAR $=EXIT
-!IF( $^ STATE VAR ^$ @INSIDE@ $ EX VAR $ )!{<BRK>)}
-WRITE(|HIRO_CALCLATOR|)
-WRITE(--------------)
-WRITE(|7    8    9 |)
-WRITE(-------------|)
-WRITE(|4    5    6 |)
-WRITE(-------------|)
-WRITE(|1    2    3 |)
-WRITE(-------------|)
-WRITE(|/    *      |)
-WRITE(-------------|)
-WRITE(|+    -    = |)
-WRITE(-------------|)
+$^ state var ^$=UI( ENTER EQUATION)
+$ ex var $=EXIT
+!if( $^ state var ^$ @inside@ $ ex var $ )!{
+brk}
+# a var #= 1
+# b var #= 2
+write(|HIRO_CALCLATOR|)
+write(--------------)
+write(|7    8    9 |)
+write(-------------|)
+write(|4    5    6 |)
+write(-------------|)
+write(|1    2    3 |)
+write(-------------|)
+write(|/    *      |)
+write(-------------|)
+write(|+    -    = |)
+write(-------------|)
