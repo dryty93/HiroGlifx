@@ -1,7 +1,12 @@
 from simpleLibrary import *
 from random import randrange
 
-
+dictNumHandler = []
+dictIter = 0
+keys = []
+vals = []
+num = 0
+listOfDicts = []
 listOfLists = []
 exList = []
 anotherList = []
@@ -23,7 +28,9 @@ bools = []
 randomList = []
 newList = []
 paramList = []
-
+aNum = 0
+counter = 0
+countNow = 0
 
 def boolSep(string):
     """This seperates booleans based on < or >"""
@@ -140,7 +147,6 @@ def randFive():
     leftRand = str(w[0])
     rightRand = str(w[-1])
 
-    #if '=' not in rightRand:
     varDict[str(w[0])] = randomVarF
 
 
@@ -198,12 +204,9 @@ def boolStat():
     finalCond = condJoinerN[0]
 
     if 'if' in words and 'NOT' not in words:
-        #print(finalCond,'fcc')
         fcList.append(finalCond)
         if len(fcList) >= 1:
-            #finalCond = str(fcList).split(" ")
-            #finalCond = str(finalCond).join(",")
-           # print(finalCond,'fin')
+
             condPrep()
 
 
@@ -213,7 +216,6 @@ def boolStat():
         noncondJoin = ''.join(noncond)
         finalnonSplit = noncondJoin.split(')!')
         finalnonCond = finalnonSplit[0]
-       # bools.append(finalnonCond)
         nons.append(finalnonCond)
         condPrep()
 
@@ -222,7 +224,7 @@ def condPrep():
     global bools
     global finalnonCond
     global finalCond
-    #print(finalCond)
+    print(finalCond)
     if 'var' in finalCond:
        lBoolSplitL = finalCond.split('<')
        lBoolSplitR = finalCond.split('>')
@@ -379,11 +381,6 @@ def condPrep():
 
                         trueList.append(n)
 
-
-
-             #   print(trueList[:],'lk')
-
-            #print(trueList,'noe')
             if '@inside@' not in char:
                 anotherList.append(char)
 
@@ -398,11 +395,6 @@ def condPrep():
                     if lBool:
                         boolExec()
 
-                  #  if not trueList[-2].isdigit():
-                   #     raise Exception("HIRO##:Integer Expected in",'[',str(trueList[-2]),']')
-                    #if not trueList[-1].isdigit():
-                       # raise Exception("HIRO##:Integer Expected in",'[',str(trueList[-1]),']')
-
             else:
                 if len(trueList) > 1:
                     tl = str(trueList[-2]) + str("".join(anotherList)) + str(trueList[-1])
@@ -412,33 +404,16 @@ def condPrep():
                         if lBool:
                             boolExec()
 
-            #if len(trueList) == 2:
-                #print(anotherList,'re',trueList)
-            #else:
-             #   pass
-                # if boolFinDecider.isdigit():
-                    #    numFinal = boolDecide
-                        #print(numFinal,'nf')
-                        # this is supposed to check if the last char is a parenthesis
-                     #   if numFinal[-1] in tokens or numFinal[-1] == ' ':
-                            #print(numFinal)
-
-                      #      pass
-
     if nonsNum > 0:
-
         if 'var' not in finalnonCond:
             numFinal = finalnonCond
             if numFinal[-1] in tokens or numFinal[-1] == ' ':
                 pass
-
             else:
                 lBool = eval(numFinal)
                 if not lBool:
                     boolExec()
-
         elif 'var' in finalnonCond:
-
             finalnL = finalnonCond.split('>')
             char = finalnonCond.split(' ')
             char = char[5]
@@ -450,36 +425,21 @@ def condPrep():
             finalnEq = finalnonCond.split('==')
             fnjoin = ''.join(finalnL)
             for everything in varDict:
-
-
                 if everything in finalnonL or everything in finalnonR:
-
                     if varDict[everything].isdigit():
                         nonList.append(varDict[everything])
                         nonList.append(char)
-
-
-
                     if len(nonList) > 3:
                         nonList.pop(-1)
                         finalnonCond = nonList[0] + nonList[1] + nonList[2]
                         numFinal = finalnonCond
-
                         lBool = eval(numFinal)
                         if not lBool:
                             boolExec()
-
-
                     if boolFinDecider.isdigit():
                         numFinal = boolDecide
-                        #print(numFinal,'nf')
-                        # this is supposed to check if the last char is a parenthesis
                         if numFinal[-1] in tokens or numFinal[-1] == ' ':
-                            #print(numFinal)
-
                             pass
-
-
                     elif '@inside@' in finalnonCond:
                         bools.append(chars)
                         if '\n' in bools:
@@ -547,6 +507,10 @@ def boolExec():
         o = ''.join(fWriteSequence)
         fWrite = o.split(')')
         finalWriter = ''.join(fWrite)
+
+        if 'dict' in finalWriter:
+            finalWriter = finalWriter.split(" ")
+            #dictOfDicts['name']
         if ',' in finalWriter:
 
             splitting = finalWriter.split(",")
@@ -557,16 +521,12 @@ def boolExec():
 
             else:
                 for toks in tokens:
-                    #print(toks)
                     if toks in finalWriter:
 
                         exList.append(toks)
                     if len(exList) > 0:
                         exDecider = exList
                         print(exDecider)
-
-           # if tokens[:] in finalWriter:
-            #    breakNow()
         else:
             write(finalWriter)
             for everything in varDict:
@@ -714,17 +674,12 @@ def iterHold():
     global w
 
     ln = str(loopNum)
-
     w = ('').join(w[0])
-
-   # w = w.split('(')
     varDict[w] = ln
 
 def listMaker():
     global words
     for i in tokens:
-
-
         if i not in words:
             if 'var' not in words:
                 potListGen = words.split("\n")
@@ -742,7 +697,57 @@ def listMaker():
                         print(varDict[everything])
 
 
+def dictMaker():
+    global aNum
+    global num
+    global counter
+    global countNow
+    global dictIter
 
+    dictIter += 1
+    dictName = words.rstrip("\n")
+    dictName = dictName.split(" ")
+    dictVals = dictName[3:]
+    dictName = dictName[1]
+    dictOfDicts[dictName] = {}
+    counting = 0
+
+    for count in dictVals:
+        fVals = count.split(", ")
+        if '>' in count:
+            keyValDiv = count.split(">")
+            listOfDicts.append(fVals)
+            keys.append(keyValDiv[0])
+            vals.append(keyValDiv[-1])
+            lenOfDictsList = len(listOfDicts)
+
+
+    if len(listOfDicts) > len(dictVals):
+        listOfDicts.pop(0)
+
+    for kv in keys:
+        keyFind = len(keys)
+
+        if countNow < keyFind:
+            if len(dictOfDicts) < 2:
+                dictOfDicts[dictName][kv] = vals[countNow]
+                countNow += 1
+        if len(dictOfDicts) >= 2:
+            keyFinder = len(keys)
+            valFinder = len(vals)
+
+        #checks how many dictionaries are in dictofdicts and seperates
+        # keys and values into their respective sub-dictionaries
+        if len(dictOfDicts) >= 1:
+            while num <  len(keys):
+                if num <= len(keys):
+                    dictNumHandler.append(num)
+                    dictOfDicts[dictName][keys[num]] = vals[dictNumHandler[num]]
+                    num += 1
+                if num > len(keys):
+                    print("bye")
+
+    print(dictOfDicts)
 
 loop = True
 loopNum = 0
@@ -825,3 +830,6 @@ while loop:
 
             if 'list' in words:
                 listMaker()
+
+            if 'dict' in words:
+                dictMaker()
