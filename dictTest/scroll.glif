@@ -1,0 +1,11 @@
+$ b var $=Hi
+
+write($ b var $)
+
+dict name = r>d, m>d, n>d, 4>8
+
+dict jane = 3>f, 22>d, 33>ff, 33>54
+
+dict fane = 3>f, 22>d, 33>ff, 33>54
+
+brk
