@@ -1,19 +1,28 @@
 from simpleLibrary import *
 from random import randrange
 
+
+listOfLists = []
+exList = []
+anotherList = []
 functionLibrary = {}
-tokens = ['!', 'WRITE', '+', '!IF', 'ELSE', '<', '>', '@INSIDE@', 'VAR','!IF-NOT', 'UI','DEF']
+tokens = ['!', 'write', '+', '!if', '<', '>', '@inside@', 'var','!IF-NOT', 'UI','DEF','brk']
 expression = ['+', '-', '/', '*']
 inPut = []
 varDict = {}
+listDict = {}
+dictOfDicts = {}
 functDict = {}
 isString = False
 isInt = False
 numList = []
 stringList = []
 n = {}
+trueList = []
 bools = []
 randomList = []
+newList = []
+paramList = []
 
 
 def boolSep(string):
@@ -31,8 +40,8 @@ def varSetter():
 
 
     for chars in tokens:
-        w = words.split('VAR')
-        wFuncs = words.split('WRITE')
+        w = words.split('var')
+        wFuncs = words.split('write')
         insideFunction = words.split('@INSIDE@')
         uIFuncs = words.split('UI')
         n = ' '.join(w)
@@ -55,7 +64,7 @@ def varSetter():
 
         if '$' in elements:
             stringList.append(elements)
-            # stringSet()
+            stringSet()
 
     for notVars in varDict:
         n = varDict.copy()
@@ -106,8 +115,12 @@ def intSet():
 
 
 def stringSet():
+    global words
     isString = True
     isInt = False
+    if "''" in words:
+        words = words.split("''")
+        print(words,'string')
 
 
 def comment():
@@ -152,12 +165,13 @@ def RANDOM():
     if 'RAND5' in words:
         randFive()
 
+    if 'RAND100' in words:
+        randHun()
 
-    elif 'RAND10' in words:
+    if 'RAND10' in words:
         randTen()
 
-    elif 'RAND100' in words:
-        randHun()
+
 
 
 def boolStat():
@@ -166,20 +180,32 @@ def boolStat():
 
 
     global lBool
-    global finalCond
+    global nons
     global finalCond
     global finalExecution
     global finalnonCond
     global lBoolSplitLJoint
     global lBoolSplitRJoint
+
     bools = []
     nons = []
+    # created fclist to hold final condition
+    fcList= []
 
-
-    cond = words.split('!IF(')
+    cond = words.split('!if(')
     condJoiner = ''.join(cond)
     condJoinerN = condJoiner.split(')!')
-    finalCond = ''.join(condJoinerN)
+    finalCond = condJoinerN[0]
+
+    if 'if' in words and 'NOT' not in words:
+        #print(finalCond,'fcc')
+        fcList.append(finalCond)
+        if len(fcList) >= 1:
+            #finalCond = str(fcList).split(" ")
+            #finalCond = str(finalCond).join(",")
+           # print(finalCond,'fin')
+            condPrep()
+
 
     if 'IF-NOT' in words:
 
@@ -187,56 +213,119 @@ def boolStat():
         noncondJoin = ''.join(noncond)
         finalnonSplit = noncondJoin.split(')!')
         finalnonCond = finalnonSplit[0]
-        bools.append(finalnonCond)
+       # bools.append(finalnonCond)
         nons.append(finalnonCond)
+        condPrep()
 
 
-    if '<BRK>' not in finalCond:
+def condPrep():
+    global bools
+    global finalnonCond
+    global finalCond
+    #print(finalCond)
+    if 'var' in finalCond:
+       lBoolSplitL = finalCond.split('<')
+       lBoolSplitR = finalCond.split('>')
+       lBoolSplitEq = finalCond.split('==')
+       lBoolSplitUEQ = finalCond.split('!=')
+       lBoolSplitLJoint = lBoolSplitL[0]
+       lBoolSplitRJoint = lBoolSplitR[0]
+       lBoolSplitEqJoint = lBoolSplitEq[0]
+       lBoolSplitUEQ = lBoolSplitEq[0]
+       lEqR = lBoolSplitEqJoint[:]
+       lEqL = lBoolSplitEqJoint[1]
 
-        if 'VAR' and '<' in finalCond or 'VAR' and '>' in finalCond:
-            lBoolSplitL = finalCond.split('<')
-            lBoolSplitR = finalCond.split('>')
-            lBoolSplitLJoint = lBoolSplitL[0]
-            lBoolSplitRJoint = lBoolSplitR[0]
-            for everything in varDict:
+       for everything in varDict:
 
-                if everything in lBoolSplitLJoint:
-                    convertedKey = str(varDict[everything])
-                    finalConvertedKey = convertedKey.split(' ')
-                    finalConversionKey = ('').join(finalConvertedKey)
-                    finalConvKeyReady = finalConversionKey.split("\n")
-                    digAloneKey = ('').join(finalConvKeyReady[0])
-                    digAloneFinalkey = digAloneKey.split('=')
-                    digKeyF = ('').join(digAloneFinalkey)
-                    if '#' in digKeyF:
-                        lastConvKey = digKeyF.split('#')
-                        digitKey = lastConvKey[1]
-                        bools.append(digitKey)
+               if everything in lBoolSplitLJoint and 'NOT' not in lBoolSplitRJoint:
 
-                    elif digKeyF.isdigit():
+                   convertedKey = str(varDict[everything])
+                   finalConvertedKey = convertedKey.split(' ')
+                   finalConversionKey = ('').join(finalConvertedKey)
+                   finalConvKeyReady = finalConversionKey.split("\n")
+                   digAloneKey = ('').join(finalConvKeyReady[0])
+                   digAloneFinalkey = digAloneKey.split('=')
+                   digKeyF = ('').join(digAloneFinalkey)
 
-                        bools.append(digKeyF)
+                   if '#' in digKeyF:
+                       lastConvKey = digKeyF.split('#')
+                       lastConvKey = lastConvKey[1]
+                       bools.append(lastConvKey)
+
+                   if '$' in digKeyF:
+                       lastConvKey = digKeyF.split('$')
+                       lastConvKey = lastConvKey[1]
+                       bools.append(lastConvKey)
+
+                   if '$^' in digKeyF:
+                       lastConvKey = digKeyF.split('$^')
+                       lastConvKey = lastConvKey[1]
+                       bools.append(lastConvKey)
+
+                   elif digKeyF.isdigit():
+
+                       bools.append(digKeyF)
 
 
 
-                elif everything in lBoolSplitRJoint:
+               if everything in lBoolSplitRJoint and 'NOT' not in lBoolSplitRJoint:
 
-                    convertedKey = str(varDict[everything])
-                    finalConvertedKey = convertedKey.split(' ')
-                    finalConversionKey = ('').join(finalConvertedKey)
-                    finalConvKeyReady = finalConversionKey.split("\n")
-                    digAloneKey = ('').join(finalConvKeyReady[0])
-                    digAloneFinalkey = digAloneKey.split('=')
-                    digKeyF = ('').join(digAloneFinalkey)
+                   convertedKey = str(varDict[everything])
+                   finalConvertedKey = convertedKey.split(' ')
+                   finalConversionKey = ('').join(finalConvertedKey)
+                   finalConvKeyReady = finalConversionKey.split("\n")
+                   digAloneKey = ('').join(finalConvKeyReady[0])
+                   digAloneFinalkey = digAloneKey.split('=')
+                   digKeyF = ('').join(digAloneFinalkey)
 
-                    if '#' in digKeyF:
-                        lastConvKey = digKeyF.split('#')
-                        digitKey = lastConvKey[1]
-                        bools.append(digitKey)
+                   if '#' in digKeyF:
+                       lastConvKey = digKeyF.split('#')
+                       digitKey = lastConvKey[1]
+                       bools.append(digitKey)
 
-                    elif digKeyF.isdigit():
 
-                        bools.append(digKeyF)
+                   elif digKeyF.isdigit():
+
+                       bools.append(digKeyF)
+
+               if everything in lBoolSplitEqJoint and 'NOT' not in lBoolSplitEqJoint:
+
+                   convertedKey = str(varDict[everything])
+
+                   finalConvertedKey = convertedKey.split(' ')
+                   finalConversionKey = ('').join(finalConvertedKey)
+                   finalConvKeyReady = finalConversionKey.split("\n")
+                   digAloneKey = ('').join(finalConvKeyReady[0])
+                   digAloneFinalkey = digAloneKey.split('=')
+                   digKeyF = ('').join(digAloneFinalkey)
+                   bools.append(digKeyF)
+
+                   if '#' in digKeyF:
+                       lastConvKey = digKeyF.split('#')
+                       digitKey = lastConvKey[1]
+                       bools.append(digitKey)
+
+                   elif digKeyF.isdigit():
+                       bools.append(digKeyF)
+
+               if everything in lBoolSplitUEQ and 'NOT' not in lBoolSplitRJoint:
+
+                   convertedKey = str(varDict[everything])
+                   finalConvertedKey = convertedKey.split(' ')
+                   finalConversionKey = ('').join(finalConvertedKey)
+                   finalConvKeyReady = finalConversionKey.split("\n")
+                   digAloneKey = ('').join(finalConvKeyReady[0])
+                   digAloneFinalkey = digAloneKey.split('=')
+                   digKeyF = ('').join(digAloneFinalkey)
+
+                   if '#' in digKeyF:
+                       lastConvKey = digKeyF.split('#')
+                       digitKey = lastConvKey[1]
+                       bools.append(digitKey)
+
+                   elif digKeyF.isdigit():
+
+                       bools.append(digKeyF)
 
     for chars in finalCond:
         # put chars for digits as its own list and check the length
@@ -254,10 +343,91 @@ def boolStat():
     #nonsnum checks for negation in bools
     nonsNum = len(nons)
     nonList = []
+    if nonsNum <= 0:
+        if 'var' not in finalCond:
+            numFinal = finalCond
+            if numFinal[-1] in tokens or numFinal[-1] == ' ':
+                pass
+
+            else:
+                lBool = eval(numFinal)
+                if lBool:
+                    boolExec()
+
+        elif 'var' in finalCond:
+            finalL = finalCond.split('>')
+            char = finalCond.split(' ')
+            char = char[5]
+            finalL = finalL[0]
+            finalR = finalL[-1]
+            finalR = finalCond.split('<')
+            finalRE = finalR[0]
+            finalLE = finalR[-1]
+            finalEq = finalCond.split('==')
+            finalEqL = finalEq[0]
+            finalEqR = finalEq[-1]
+
+            for everything in varDict:
+
+
+                if finalL or finalR in everything:
+
+
+                    if varDict[everything].isdigit():
+                        n = varDict[everything]
+
+
+                        trueList.append(n)
+
+
+
+             #   print(trueList[:],'lk')
+
+            #print(trueList,'noe')
+            if '@inside@' not in char:
+                anotherList.append(char)
+
+            if len(anotherList) > 1:
+                anotherList.pop(0)
+
+                if trueList[-2].isdigit():
+                    tl = str(trueList[-2]) + str("".join(anotherList)) + str(trueList[-1])
+                    numFinal = tl
+
+                    lBool = eval(numFinal)
+                    if lBool:
+                        boolExec()
+
+                  #  if not trueList[-2].isdigit():
+                   #     raise Exception("HIRO##:Integer Expected in",'[',str(trueList[-2]),']')
+                    #if not trueList[-1].isdigit():
+                       # raise Exception("HIRO##:Integer Expected in",'[',str(trueList[-1]),']')
+
+            else:
+                if len(trueList) > 1:
+                    tl = str(trueList[-2]) + str("".join(anotherList)) + str(trueList[-1])
+                    if '>' in tl or '<' in tl or '==' in tl or '!=' in tl:
+                        numFinal = tl
+                        lBool = eval(numFinal)
+                        if lBool:
+                            boolExec()
+
+            #if len(trueList) == 2:
+                #print(anotherList,'re',trueList)
+            #else:
+             #   pass
+                # if boolFinDecider.isdigit():
+                    #    numFinal = boolDecide
+                        #print(numFinal,'nf')
+                        # this is supposed to check if the last char is a parenthesis
+                     #   if numFinal[-1] in tokens or numFinal[-1] == ' ':
+                            #print(numFinal)
+
+                      #      pass
 
     if nonsNum > 0:
 
-        if 'VAR' not in finalnonCond:
+        if 'var' not in finalnonCond:
             numFinal = finalnonCond
             if numFinal[-1] in tokens or numFinal[-1] == ' ':
                 pass
@@ -267,7 +437,7 @@ def boolStat():
                 if not lBool:
                     boolExec()
 
-        elif 'VAR' in finalnonCond:
+        elif 'var' in finalnonCond:
 
             finalnL = finalnonCond.split('>')
             char = finalnonCond.split(' ')
@@ -280,6 +450,8 @@ def boolStat():
             finalnEq = finalnonCond.split('==')
             fnjoin = ''.join(finalnL)
             for everything in varDict:
+
+
                 if everything in finalnonL or everything in finalnonR:
 
                     if varDict[everything].isdigit():
@@ -297,68 +469,60 @@ def boolStat():
                         if not lBool:
                             boolExec()
 
-    if boolFinDecider.isdigit():
-        numFinal = boolDecide
-        #print(numFinal,'nf')
-        # this is supposed to check if the last char is a parenthesis
-        if numFinal[-1] in tokens or numFinal[-1] == ' ':
-            #print(numFinal)
 
-            pass
+                    if boolFinDecider.isdigit():
+                        numFinal = boolDecide
+                        #print(numFinal,'nf')
+                        # this is supposed to check if the last char is a parenthesis
+                        if numFinal[-1] in tokens or numFinal[-1] == ' ':
+                            #print(numFinal)
 
-        else:
-
-            lBool = eval(numFinal)
+                            pass
 
 
-
-            if lBool:
-                 boolExec()
-
-
-    elif '@INSIDE@' in finalCond:
-        bools.append(chars)
-        if '\n' in bools:
-            bools = []
-            if 'VAR' not in finalCond:
-                lBoolSplitter = finalCond.split(' ')
-                lBoolcond_one = lBoolSplitter[1]
-                lBoolcond_two = lBoolSplitter[3]
+                    elif '@inside@' in finalnonCond:
+                        bools.append(chars)
+                        if '\n' in bools:
+                            bools = []
+                            if 'var' not in finalCond:
+                                lBoolSplitter = finalCond.split(' ')
+                                lBoolcond_one = lBoolSplitter[1]
+                                lBoolcond_two = lBoolSplitter[3]
 
 
-                if lBoolcond_one in lBoolcond_two:
+                                if lBoolcond_one in lBoolcond_two:
 
-                    lBool = 2 > 1
-                    if lBool:
-                        boolExec()
+                                    lBool = 2 > 1
+                                    if lBool:
+                                        boolExec()
 
-            if 'VAR' in finalCond:
-                lBoolSplit = finalCond.split(' @INSIDE@')
-                lBoolcond_one = lBoolSplit[0]
-                lBoolcond_two_gen = lBoolSplit[1].split('{')
-                lBoolcond_two = lBoolcond_two_gen[0]
+                            if 'var' in finalCond:
+                                lBoolSplit = finalCond.split(' @inside@')
+                                lBoolcond_one = lBoolSplit[0]
+                                lBoolcond_two_gen = lBoolSplit[1].split('{')
+                                lBoolcond_two = lBoolcond_two_gen[0]
 
-                # needed so python recognizes var keys
-                for everything in varDict:
-                    everyString = everything.split('VAR $')
+                                # needed so python recognizes var keys
+                                for everything in varDict:
+                                    everyString = everything.split('var $')
 
-                    if everyString[0] in lBoolcond_one:
-                        stringCutter = str(varDict[everything]).split('=')
-                        stringJointL = stringCutter[-1].split('\n')
+                                    if everyString[0] in lBoolcond_one:
+                                        stringCutter = str(varDict[everything]).split('=')
+                                        stringJointL = stringCutter[-1].split('\n')
 
-                        if stringJointL[0] in lBoolcond_two:
-                            lBool = 2 > 1
-                            if lBool:
-                                boolExec()
+                                        if stringJointL[0] in lBoolcond_two:
+                                            lBool = 2 > 1
+                                            if lBool:
+                                                boolExec()
 
 
-                    if everyString[0] in lBoolcond_two:
-                        stringCutter = str(varDict[everything]).split('=')
-                        stringJoint = stringCutter[-1].split('\n')
-                        if  stringJointL[0] in stringJoint[0]:
-                            lBool = 2 > 1
-                            if lBool:
-                                boolExec()
+                                    if everyString[0] in lBoolcond_two:
+                                        stringCutter = str(varDict[everything]).split('=')
+                                        stringJoint = stringCutter[-1].split('\n')
+                                        if  stringJointL[0] in stringJoint[0]:
+                                            lBool = 2 > 1
+                                            if lBool:
+                                                boolExec()
 
 
 
@@ -372,32 +536,45 @@ def boolExec():
     exFinal = exJoin.split('{')
     exFi = ''.join(exFinal)
     exFinale = exFi.split('}')
+    if "," in exFinale:
+        print(exFinale)
     finalExecution = exFinale[0]
 
-    if 'WRITE' in finalExecution:
-        writeSequence = finalExecution.split('WRITE')
+    if 'write' in finalExecution:
+        writeSequence = finalExecution.split('write')
         writeStringJoin = ''.join(writeSequence)
         fWriteSequence = writeStringJoin.split('(')
         o = ''.join(fWriteSequence)
         fWrite = o.split(')')
         finalWriter = ''.join(fWrite)
-        write(finalWriter)
-        for everything in varDict:
-            if everything in finalWriter:
-                write(varDict[everything])
+        if ',' in finalWriter:
 
-    if '<BRK>' in finalExecution:
+            splitting = finalWriter.split(",")
+            print(splitting[0])
+            if 'brk' in finalWriter:
+                breakNow()
+            #if 'write' in finalWriter:
 
-        breakSeq = finalExecution.split('<BRK>')
-        breakJoin = ''.join(breakSeq)
-        fBreakSeq = breakJoin.split('(')
-        b = ''.join(fBreakSeq)
-        fbreak = b.split(')')
-        finalBreak = ''.join(fbreak)
-        exit()
+            else:
+                for toks in tokens:
+                    #print(toks)
+                    if toks in finalWriter:
 
-    if '@INSIDE@' in finalExecution:
-        insideSeq = finalExecution.split('@INSIDE@')
+                        exList.append(toks)
+                    if len(exList) > 0:
+                        exDecider = exList
+                        print(exDecider)
+
+           # if tokens[:] in finalWriter:
+            #    breakNow()
+        else:
+            write(finalWriter)
+            for everything in varDict:
+                if everything in finalWriter:
+                    write(varDict[everything])
+
+    if '@inside@' in finalExecution:
+        insideSeq = finalExecution.split('@inside@')
         insideJoin = ''.join(insideSeq)
         fInsideSeq = insideJoin.split('(')
         r = ''.join(fInsideSeq)
@@ -416,14 +593,16 @@ def boolExec():
         if 'RAND5' in valueAssign:
              randFive()
 
+
         else:
             varDict[varAssign] = valueAssign
 
 
-   #     for everything in varDict:
-  #          if everything in finalExecution:
- #               print(everything,'er')
-#                varDict[everything]
+
+def breakNow():
+
+    exit()
+
 
 def writing():
     # i likely will rewrite this so that it is more reusable for the entire project
@@ -432,7 +611,7 @@ def writing():
     global eFinale
     global writeSequence
 
-    writeSequence = words.split('WRITE')
+    writeSequence = words.split('write')
     writeStringJoin = ''.join(writeSequence)
     fWriteSequence = writeStringJoin.split('(')
     o = ''.join(fWriteSequence)
@@ -464,6 +643,7 @@ def ui(userInput):
 
 
     for everything in varDict.values():
+
 
 
         if everything in promptSplitter:
@@ -507,14 +687,27 @@ def uIOut():
     ui(last)
 
 def createFunct(funcName, funcProp):
+
+    if funcParams:
+        if 'var' in paramVals:
+            for everything in varDict:
+                if everything in paramVals[0]:
+                    print(everything)
+
+                if everything in paramVals[1]:
+                    print(everything)
+
+            funcParamsR = paramVals[0]
+            funcParamsL = paramVals[1]
+           # print(funcParamsL,funcParamsR)
+
     if 'WRITE' in funcProp:
         writeNow = funcProp
         writeSplit = writeNow.split('(')
         writeSplitter = writeSplit[1].split(')')
         writeFunEx = ''.join(writeSplitter)
         print(writeFunEx)
-    if 'VAR' in funcProp:
-        varSetter()
+
 
 def iterHold():
     global loopNum
@@ -527,33 +720,73 @@ def iterHold():
    # w = w.split('(')
     varDict[w] = ln
 
+def listMaker():
+    global words
+    for i in tokens:
+
+
+        if i not in words:
+            if 'var' not in words:
+                potListGen = words.split("\n")
+                listGen = str(potListGen).split("list")
+                listGen = listGen[1]
+                listName = listGen[0]
+                listName = str(listName).split("'")
+                listGen = str(listGen).split("=")
+                listName = listGen[0]
+                listVals = str(listGen[1:])
+                listDict[listName] = listVals
+            else:
+                for everything in varDict:
+                    if words in everything:
+                        print(varDict[everything])
+
+
+
+
 loop = True
 loopNum = 0
 while loop:
     loopNum += 1
     with open('scroll.glif', 'r') as readFile:
         for words in readFile:
-            inPut.append(words)
+
+
+            if "brk" in words:
+                loop = 0
+                exit()
+
 
             if '/*' in words:
                 comment()
 
 
-
             if 'XX' in words:
                 stringCut(words, words)
 
-            if 'VAR' in words:
+
+
+
+            if 'var' in words:
                 varSetter()
+
+
 
             if 'LN' in words:
                 iterHold()
 
             if '!' in words:
-                boolStat()
+                if '\n' in words:
+                    # words = words.replace("\n", "")
+
+                    words = (words + next(readFile))
+                    words = words.split("\n")[:]
+                    words = words[0] + words[1]
+                    boolStat()
 
 
-            if 'WRITE' in words:
+
+            if 'write' in words:
                 if '!' not in words:
                     writing()
 
@@ -566,9 +799,29 @@ while loop:
             if 'RAND' in words:
                 RANDOM()
 
-            if 'DEF' in words:
+            if 'Def' in words:
                 funcSplit = words.split('{')
+                funcParamsL = words.split('(')
+                funcParamsR = words.split(')')
+                funcParams = funcParamsL + funcParamsR
+                paramVals = ''.join(funcParams)
+                paramVals = funcParams[1].split(')')[0].split(',')
+                for length in paramVals:
+                    if length:
+                        paramList.append(length)
+                        varDict[length] = length
+                        for key in varDict:
+                            if length in key:
+                                print(length,'le')
+
+                paramList = []
+                newList.append(funcParams[:])
+                funcParamOne = funcParams[0]
+
                 funcExec = funcSplit[1].split('}')
-                functName = words.split(' ')[1]
-                # print(functName,'fwe')
+                functName = words.split(' ')[1].split('(')
+                functName = functName[0]
                 createFunct(functName, funcExec[0])
+
+            if 'list' in words:
+                listMaker()
