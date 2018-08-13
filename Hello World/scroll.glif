@@ -1,4 +1,4 @@
-$ H VAR $= H
-$ HELLO VAR $= HELLO
-WRITE(HELLO WORLD)
-!IF($ H VAR $ @INSIDE@ $ HELLO VAR $)!{(<BRK>)}
+$ hello var $=Hello, World
+write($ hello var $)
+brk
+
