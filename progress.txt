@@ -1,0 +1,50 @@
+HIROGLIFX Requirements:
+Completion Rate[22/34]:
+Syntax [3/5]:
+    new line ignored [x]
+    multiple one line executions for single conditional []
+    comments[x]
+    expression handling [x]
+    variable expression handling [x]
+
+Control Flow [2/4]:
+    loop control []
+    user generated loop [x]
+    if statement [x]
+    if-not statement []
+
+Data Structures [2/8]:
+    var declaration [x]
+    string [x]
+    nums [x]
+    bools [x]
+    floats []
+    classes []
+    list []
+    dictionaries/hash maps [x]
+
+Memory [1/4]:
+    garbage collection []
+    var memory retrieval [x]
+    string memory retrieval [x]
+    num memory retrieval [x]
+
+Functions[3/5]:
+    random[]
+    write[x]
+    iteration number [x]
+    user function parameter recognition & retrieval []
+    function declaration [x]
+    @inside@[]
+
+Error Handling[]:
+    incorrect str variable declaration[x]
+    incorrect num variable declaration[x]
+    incorrect bool variable declaration[x]
+    incorrect dictionary syntax[]
+    incorrect line syntax[]
+
+ Bugs[1/2]:
+    dict is not printed in proper hiro syntax [x]
+    vars and dicts cant be declared after comment[x]
+    vars not written in if statements []

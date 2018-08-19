@@ -7,6 +7,14 @@ Python 3.6
 
 
 
+
+def replace_value_with_definition(current_dict,key_to_find, definition):
+    for key in current_dict.keys():
+        if key == key_to_find:
+            current_dict[key] = definition
+
+    #replace_value_with_definition(replacement="%s")
+
 def types(varType):
 
     # changes string type
