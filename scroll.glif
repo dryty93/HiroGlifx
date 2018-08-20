@@ -1,9 +1,11 @@
-# len_of_name var # = 4
+# lenP var # = 4
+# len var # = 4
 $ money var $=alot
 # sum var #=2 + 44444
 $ n var $=er
-!if(# len_of_name var # < # sum var #)!{
-write($ money var $)
+list numbers = 1, 2, 3
+!if(3==3)!{
+write($ n var $)
 }
 dict sign = libra>october, virgo>september, may>taurus
 dict name = Joshua>Dryden, Tobe>Uwaechina, Tyler-Joshua>Dryden

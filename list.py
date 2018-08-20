@@ -1,11 +1,12 @@
-
 # this function was taken from a previous branch of HiroGlifx. I am refactoring it to work
 # in accordance with the rest of the modules within this directory.
 def listMaker():
     from main import StartInterpret
+    from variable import Variable
 
     line = StartInterpret.line
-    listDic = {}
+
+    listDict = {}
 
     vNum = 0
     tokens = ['!', 'write', '+', '!if', '<', '>', '@inside@', 'var', '!IF-NOT', 'UI', 'DEF', 'brk', 'list', 'dic']
@@ -40,48 +41,18 @@ def listMaker():
                             print(vNum,'vNum')
                 if 'var' not in listVals:
                     listDict[listName] = listVals
-                  #  print(listDict)
+                    print(listDict,listVals)
 
                 if 'var' in line:
 
-                    for elements in listVals.split(","):
-                        for everything in varDict:
-                            # this expression makes sure that the element is not a variable or a list and pops
-                            # the last character of the string so that it matches the key in
-                            # the variable dictionary (varDict)
-                            if 'var' in elements:
-                                if 'list' not in elements:
-                                    if 'dict' not in elements:
-                                        vKey = elements.split(" ")
-                                        vKey.pop(-1)
-                                        vKey = vKey[1] + " " + vKey[2]
-
-                                        if vKey in everything:
-                                            varHold = varDict[everything]
-                                            if len(varHold) > 4:
-                                                pp = varHold
-                                                pnum = len(pp) * 2
-                                                exList.append(pp)
-                                                listVals = varValGet + varHold
-                                                listDict[listName] = listVals
-                                        if len(listOfLists) > len(listVals):
-                                            listOfLists.pop(0)
-                                leee = len(listDict)
-                                if leee == 1:
-                                    if len(listOfLists) < 4:
-                                        listOfLists.append(listVals)
-                                        listOfLists.append(pp)
-                                        leee += 1
-                                else:
-                                    nun = 4
-
-                                    pass
-            if 'write' in words:
-                if ',' not in words:
-                    listName = words.split("list")[-1].split(")")[0] + " "
+                    print(line)
+            if 'write' in line:
+                if ',' not in line:
+                    listName = line.split("list")[-1].split(")")[0] + " "
 
                     listPrinted = listName + ":" + listDict[listName]
     try:
         print(listPrinted)
     except:
         pass
+listMaker()

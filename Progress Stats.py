@@ -12,6 +12,8 @@ def progress_scorer():
     new_line_count = 0
     each_section = []
     bugs = []
+    section_list = []
+
 
     with open('progress.txt', 'r') as readFile:
         for line in readFile:
@@ -27,12 +29,16 @@ def progress_scorer():
             if '[x]' in line:
                 complete_items += 1
             if ':' in line:
-                print(line)
+                section_complete_items = complete_items
+
+                section_list.append(section_complete_items)
+                section_complete_items = 0
+                print(section_list)
+
             if '[]' in line:
 
                 if ':' not in line:
                     items_in_progress += 1
-                    print(line)
             items_left = all_items - complete_items + 1
 
 

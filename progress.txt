@@ -1,5 +1,4 @@
-HIROGLIFX Requirements:
-Completion Rate[22/34]:
+HIROGLIFX Requirements
 Syntax [3/5]:
     new line ignored [x]
     multiple one line executions for single conditional []
@@ -9,25 +8,38 @@ Syntax [3/5]:
 
 Control Flow [2/4]:
     loop control []
+    LN keyword []
     user generated loop [x]
     if statement [x]
     if-not statement []
 
 Data Structures [2/8]:
-    var declaration [x]
-    string [x]
-    nums [x]
-    bools [x]
-    floats []
-    classes []
-    list []
-    dictionaries/hash maps [x]
+    nums and string var declaration [x]
+    data_store var declaration []
+    basic implementation string [x]
+    basic implementation nums [x]
+    basic implementation bools [x]
+    basic implementation floats []
+    basic implementation classes []
+    basic implementation list []
+    basic implementation dictionaries/hash maps [x]
+    dictionary indexing []
+    list indexing[]
+    instant variable conversion [x]
+    importing code []
 
 Memory [1/4]:
     garbage collection []
     var memory retrieval [x]
     string memory retrieval [x]
     num memory retrieval [x]
+    dictionary memory retrieval by name[]
+    class storage []
+    class instance storage []
+    class functions storage []
+    class variable storage []
+    class linkage storage []
+    function name space storage []
 
 Functions[3/5]:
     random[]
@@ -36,6 +48,10 @@ Functions[3/5]:
     user function parameter recognition & retrieval []
     function declaration [x]
     @inside@[]
+    string split []
+    string join []
+    math pi function []
+    math area function []
 
 Error Handling[]:
     incorrect str variable declaration[x]
@@ -43,8 +59,17 @@ Error Handling[]:
     incorrect bool variable declaration[x]
     incorrect dictionary syntax[]
     incorrect line syntax[]
+    incorrect dictionary index syntax[]
+    undefined values []
 
  Bugs[1/2]:
     dict is not printed in proper hiro syntax [x]
     vars and dicts cant be declared after comment[x]
-    vars not written in if statements []
+   *only strings work now * vars not written in if statements [x]
+    nums not written in if statements[]
+    loop_through data store does not update or hold data []
+    comments affect variables value[]
+    only two write statements can be applied to an if statement[]
+    if statement cannot yet evaluate a variable against a regular number []
+
+

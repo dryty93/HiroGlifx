@@ -110,6 +110,9 @@ class Variable():
                 var_value =varDict[keys]
                 var_look_up_list.append(var_value)
                 Variable.varLookUp.var_value = var_look_up_list[-1]
+            else:
+                pass
+              #  print(var_key_check,varDict)
 
 
 if __name__=='__main__':

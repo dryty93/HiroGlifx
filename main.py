@@ -41,7 +41,7 @@ class StartInterpret():
 
                     var = Variable()
                     if '/*' in self.line:
-                        line = next(self.readFile)
+                        self.line = next(self.readFile)
 
                     if 'loop_through' in line:
                         self.line = self.line + next(self.readFile)
@@ -67,5 +67,4 @@ class StartInterpret():
                         Dictionary().init_indexDict()
                     if 'brk' in line:
                         exit()
-
 StartInterpret().initialize_interpreter()
