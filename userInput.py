@@ -1,4 +1,5 @@
-
+# this is an early implementation of the user input function. it is being
+# edited for better readability and performance.
 
 def ui(userInput):
     from variable import varDict
@@ -15,14 +16,14 @@ def ui(userInput):
 
 
 def uIOut():
-    from main import line
+    from main import StartInterpret
 
     global line
     global finalPrompt
     global promptVar
     global uiAnswer
 
-
+    line = StartInterpret.line
     promptSeq = line.split('UI')
     promptJOin = ''.join(promptSeq)
     fPrompt = promptJOin.split('(')

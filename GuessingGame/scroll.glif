@@ -4,8 +4,6 @@ $ inter var $=i
 
 $ advan var $= a
 
-# a var #=LN
-
 $^ state var ^$=UI(Guess a number between 1 and 100:)
 
 # ans var #=RAND100

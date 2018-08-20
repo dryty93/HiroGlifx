@@ -1,4 +1,5 @@
-$ hello var $=Hello, World
-write($ hello var $)
-brk
+write(Hello World)
+loop_through(val=3:data_store=x){
+write(3), write(u)
+}brk
 

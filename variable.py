@@ -9,6 +9,7 @@ is_str = False
 is_user_input = False
 list_of_strings = []
 list_of_ints = []
+var_look_up_list = []
 class Variable():
     def __init__(self,):
         pass
@@ -89,8 +90,11 @@ class Variable():
 
             varValList.append(varVal)
             self.varDictUpdate()
+
     def writeVar(self):
         from main import StartInterpret
+
+
         line = line = StartInterpret.line
         if ',' not in line:
             varConvert = line.split("(")[-1].split(")")[0]
@@ -99,8 +103,13 @@ class Variable():
                 if keys in varConvert:
                     print(varDict[keys])
 
+    def varLookUp(self,var_key_check):
 
-
+        for keys in varDict:
+            if keys in var_key_check:
+                var_value =varDict[keys]
+                var_look_up_list.append(var_value)
+                Variable.varLookUp.var_value = var_look_up_list[-1]
 
 
 if __name__=='__main__':

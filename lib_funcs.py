@@ -1,6 +1,6 @@
 from dictionary import Dictionary,dictOfDicts
 from variable import Variable, varCount,varNameList
-
+from random import randrange
 
 class Lib_Funcs():
     def __init__(self):
@@ -43,22 +43,54 @@ class Lib_Funcs():
                     Variable().writeVar()
 
     def writeDict(self):
+
         dictGetter = line.split("(")[-1].split(")")[0]
+
         for i in dictOfDicts:
             print(dictOfDicts[i])
 
 
+    def randFive(self):
+        global rightRand
+        global randomVarF
+
+        randomVar = str(randrange(1, 6))
+        randomList.append(randomVar)
+        randomVarF = str(randomList[0])
+        #leftRand = str(w[0])
+        #rightRand = str(w[-1])
+
+        #varDict[str(w[0])] = randomVarF
+
+
+    def randTen(self):
+        randomVar = str(randrange(1, 11))
+        randomList.append(randomVar)
+        randomVarF = str(randomList[0])
+        #varDict[str(w[0])] = randomVarF
+
+
+    def randHun(self):
+        randomVar = str(randrange(1, 101))
+        randomList.append(randomVar)
+        randomVarF = str(randomList[0])
+        #varDict[str(w[0])] = randomVarF
+
 
     def randomize(self):
-        function_state = 0
-        if function_state == 0:
-            from main import line
-            function_state += 1
+        '''Creates random ranges in increments of 1-5, 1-10 and 1-100'''
+        global randomList
+        global randomVarF
 
+        if 'RAND5' in line:
+            self.randFive()
 
-        if 'rand' in line:
-            print('o')
-   # def
+        if 'RAND100' in line:
+            self.randHun()
+
+        if 'RAND10' in line:
+            self.randTen()
+
 
 if __name__=='__main__':
     print("Lib_Funcs Class:"

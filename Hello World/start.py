@@ -1,2 +1,2 @@
-from HIRO import *
+from main import *
 

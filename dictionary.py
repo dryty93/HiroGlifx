@@ -105,6 +105,7 @@ class Dictionary():
                 eachDict.append("dict"+" " + dictWrittenName +" " + "=" + dictKeysAndVals)
 
 
+
     def init_indexDict(self):
         """This functions creates an index for the dictionary
         in proper HiroGlifx syntax"""
@@ -128,7 +129,8 @@ class Dictionary():
             nameDictList.append(nameDict)
             dictDataList = i.split("=")[-1].split(",")
             dict_list_hold.append(dictDataList)
-            print(user_requested_dict_name,'index:',hiro_dic_index_val + 1,dictDataList[hiro_dic_index_val])
+
+        print(user_requested_dict_name,'index',hiro_dic_index_val + 1,':',dictDataList[hiro_dic_index_val])
 
         if num_of_dicts_in_hiro_dic_list > 0:
           #  print(count_times_init_runs,'count')
