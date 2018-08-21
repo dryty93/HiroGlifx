@@ -1,5 +1,5 @@
 from userInput import uIOut,ui
-
+from random import *
 varNameList = []
 varValList = []
 varCount = 0
@@ -17,18 +17,31 @@ class Variable():
     def varDictUpdate(self):
         """This makes variable name a key and variable value a value"""
         from main import StartInterpret
+        from lib_funcs import Lib_Funcs
 
         line = StartInterpret.line
+        if 'rand' in str(varVal):
 
-        for items in range(len(varValList)):
-            if '/*' not in line:
-                if "$^" not in varName:
-                    varDict[varName] = varVal
+            random_var_name = line.split("=")[0]
+            if 'rand5' in str(varVal):
+                random_var_value = str(randrange(1, 6))
+            if 'rand10' in str(varVal):
+                random_var_value = str(randrange(1, 11))
+            if 'rand100' in str(varVal):
+                random_var_value = (randrange(1, 101))
+            varDict[random_var_name] = random_var_value
+        if 'rand' not in str(varVal):
+            for items in range(len(varValList)):
+                if '/*' not in line:
+                    if "$^" not in varName:
+                        if 'rand' not in str(varVal):
+                            varDict[varName] = varVal
 
 
     def newVariable(self):
 
         from main import StartInterpret
+        from lib_funcs import Lib_Funcs
 
         global write_state_var
 
@@ -71,7 +84,9 @@ class Variable():
 
                 # Checks if the variable type is num/int and evaluates it if the variable type
                 #is a num/int.
-                if is_num:
+
+
+                if is_num and 'rand' not in varVal:
                     if "+" or "*" or "/" or '**' or "-" or ('***') in varVal:
                         varVal = eval(varVal)
 

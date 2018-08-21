@@ -1,14 +1,25 @@
 $ b var $=Hi
 
-write($ b var $)
+# l var #= rand10
 
-dict name = r>d, m>d, n>d, 4>8
+# h var #= 44
 
-dict jane = 3>f, 22>d, 33>ff, 33>54
-write(dict jane)
+dict name =r>d, m>d, n>d, 4>8
 
-dict fane = 3>f, 22>d, 0>ff, 33>54
+write(# l var #)
 
-data_store var =index(dict jane:3)
+dict jane =3>f, 22>d, 33>ff, 33>54
 
+!if(w @inside@ weed){
+write(no)
+}
+dict fane =ty>dry, to>uwae, jo>dry, tr>dry
+write(dict fane)
+
+/* this will check the dict you are referencing for the specified key and return the value
+name^r
+
+!if(3 > 1)!{
+write( $ b var $)
+}
 brk

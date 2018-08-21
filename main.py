@@ -20,6 +20,7 @@ class StartInterpret():
         pass
 
     def initialize_interpreter(self):
+        """This starts the HiroGlifx interpretter """
 
         time.sleep(1)
         print("Interpretting.\x07.\x07.\x07")
@@ -30,16 +31,20 @@ class StartInterpret():
         while True:
 
 
+            line_list = []
             with open('scroll.glif', 'r') as readFile:
 
                 self.readFile = readFile
 
                 for line in readFile:
                     self.line = line
+
+
                   #  print(self.line_class_var)
                     #print(self.line)
 
                     var = Variable()
+
                     if '/*' in self.line:
                         self.line = next(self.readFile)
 
@@ -66,5 +71,9 @@ class StartInterpret():
                     if 'index' in line:
                         Dictionary().init_indexDict()
                     if 'brk' in line:
+                      #  print(line_location)
+
                         exit()
+
+
 StartInterpret().initialize_interpreter()

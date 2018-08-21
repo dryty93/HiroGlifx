@@ -1,5 +1,4 @@
 dictOfDicts = {}
-dictIter = 0
 listOfDicts = []
 keys = []
 vals = []
@@ -9,24 +8,24 @@ dictNumHandler = []
 pyToHiDictConv = []
 hiroDictIndex = 0
 eachDict = []
+dict_of_hi_dicts = {}
+dict_of_hi_dicts_final_conversion = {}
+hiro_dicts_name_list = []
+hiro_key_val_map = {}
 
 
 class Dictionary():
 
     def dictMaker(self):
         from main import StartInterpret
-        global aNum
         global num
-        global counter
         global countNow
-        global dictIter
         global lenOfDictsList
         global py_to_hiro_pass_line_var
         global num_of_dicts_in_hiro_dic_list
 
         line = StartInterpret.line
         num_of_dicts_in_hiro_dic_list = 0
-        dictIter += 1
         dictName = line.rstrip("\n")
         dictName = dictName.split(" ")
         dictVals = dictName[3:]
@@ -85,85 +84,58 @@ class Dictionary():
                 synListConv.append(listOfConvDicts)
                 num_of_dicts_in_hiro_dic_list = num_of_dicts_in_hiro_dic_list + 1
                 py_to_hiro_pass_line_var = line
-
                 self.pyToHiDict()
-
-
 
     def pyToHiDict(self):
         """ This converts python dictionary syntax to Hiro
         dictionary syntax for the view of the user"""
+        global dict_of_hi_dicts_final_conversion
+        global dictWrittenName
 
         state = 0
         dictInfo = py_to_hiro_pass_line_var.split("dict")[-1].split("=")
         dictWrittenName = dictInfo[0].split(" ")[1]
         dictKeysAndVals = dictInfo[-1].split("\n")[0]
-
         #hiroDictIndex = len(pyToHiDictConv)
         for i in range(lenOfDictsList):
             if len(eachDict) < len(dictOfDicts):
-                eachDict.append("dict"+" " + dictWrittenName +" " + "=" + dictKeysAndVals)
-
+                eachDict.append(dictKeysAndVals)
+                hiro_dicts_name_list.append(dictWrittenName)
+                dict_of_hi_dicts[dictWrittenName] = eachDict[i]
+            if len(eachDict) > 0:
+                dicts_indexer = [items for items in eachDict]
+                if i < len(dicts_indexer):
+                    dict_of_hi_dicts_final_conversion[dictWrittenName] = dicts_indexer[i]
 
 
     def init_indexDict(self):
         """This functions creates an index for the dictionary
-        in proper HiroGlifx syntax"""
-
-
+        in proper HiroGlifx syntax and returns it to the user"""
         from main import StartInterpret
+
         line = StartInterpret.line
+        written_hiro_dictionary_name_by_itself = line.split("dict")[-1].split("\n")[0].split(" ")[-1].split(")")[0]
+       # print('dict',hiro_dicts_name_list[1],'=',dict_of_hi_dicts[written_hiro_dictionary_name_by_itself],'ok',dict_of_hi_dicts_final_conversion.keys())
+        for items in dict_of_hi_dicts_final_conversion.keys():
+            if written_hiro_dictionary_name_by_itself in items:
+                dictionary_initial_index = 'dict '+ items +' ='+dict_of_hi_dicts_final_conversion[items]
+                print(dictionary_initial_index,)
+        hi_dicts_key_val_map_preparer = eachDict[0].split(",")
+        # this counts keys and appends to the count_hi_dicts_key_val_map_preparer
+        count_hi_dicts_key_val_map_preparer_function = lambda count_keys: count_keys + 1 if count_keys < 3 else (
+                    count_keys == 0)
+        count_hi_dicts_key_val_map_preparer = [key for key in hi_dicts_key_val_map_preparer if
+                                               count_hi_dicts_key_val_map_preparer_function]
+        for i in range(len(count_hi_dicts_key_val_map_preparer)):
+            if i <= len(count_hi_dicts_key_val_map_preparer):
+                hiro_key_val_map[count_hi_dicts_key_val_map_preparer[i].split(">")[0]] = count_hi_dicts_key_val_map_preparer[i].split(">")[-1]
 
-        count_times_init_runs = 0
-        num_of_dicts_in_hiro_dic_list_indexed_for_python = count_times_init_runs - 1
-        dict_list_hold = []
-        nameDictList = []
-        hiro_dic_index_val = line.split(":")[-1].split(")")[0]
-        hiro_dic_index_val = int(hiro_dic_index_val) - 1
-        user_requested_dict_name =  line.split(":")[0].split("(")[-1]
-        final_list_conversion = []
-
-        for i in eachDict:
-
-            nameDict = i.split("=")[0]
-            nameDictList.append(nameDict)
-            dictDataList = i.split("=")[-1].split(",")
-            dict_list_hold.append(dictDataList)
-
-        print(user_requested_dict_name,'index',hiro_dic_index_val + 1,':',dictDataList[hiro_dic_index_val])
-
-        if num_of_dicts_in_hiro_dic_list > 0:
-          #  print(count_times_init_runs,'count')
-            pass
-            if count_times_init_runs < 1:
-            #    print(nameDictList,dict_list_hold[num_of_dicts_in_hiro_dic_list_indexed_for_python])
-                count_times_init_runs += 1
-
-        if num_of_dicts_in_hiro_dic_list < 1:
-            pass
-            #print(nameDictList,dict_list_hold[0])
-        #global state
-        #print('in')
-        #state = 1
-        #if state == 0:
-         #   state += 1
-        #    self.pyToHiDict()
-
-
-        hiroDictIndex = len(pyToHiDictConv)
-        #for amount in range(len(dict_list_hold)):
-        hiro_test_key = str(dict_list_hold[0][:]).split(">")[0].split("'")[-1].split(" ")[-1]
-
-        #print(hiro_test_key)
-        for keys in range(len(dict_list_hold[0])):
-            pass
-           # print(keys,len(dict_list_hold))
-           # if len(dict_list_hold[0]) > 0:
-           #         keycount = keys - 1
-            #        print(keys,dict_list_hold[keys])
-            #if len(dict_list_hold[0]) == 0:
-             #   keys = len(dict_list_hold)
-              #  print(keys,dict_list_hold[keys])
+        # need to implement something so that the interpretter takes the users requested key
+        # looks it up against the dictionary and returns the proper dictionary item. Right now
+        try:
+            print(hiro_key_val_map['r'])
+        except:
+            exit('HiroGlifx Interpretter: Key-Val Error: \nSpecified Key Not Found!')
 
 
 if __name__=='__main__':

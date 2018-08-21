@@ -1,4 +1,4 @@
-HIROGLIFX Requirements
+HIROGLIFX Requirements[24/59]
 Syntax [3/5]:
     new line ignored [x]
     multiple one line executions for single conditional []
@@ -42,12 +42,12 @@ Memory [1/4]:
     function name space storage []
 
 Functions[3/5]:
-    random[]
+    random[x]
     write[x]
     iteration number [x]
     user function parameter recognition & retrieval []
     function declaration [x]
-    @inside@[]
+    basic implementation @inside@[x]
     string split []
     string join []
     math pi function []

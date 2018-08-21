@@ -34,7 +34,7 @@ class Lib_Funcs():
                                 if 'list' in line:
                                     print(line,'list')
                             if 'dict' in line:
-                                self.writeDict()
+                                Dictionary().init_indexDict()
                         if '$' in line:
                             pass
                     if '#' in line:
@@ -46,21 +46,8 @@ class Lib_Funcs():
 
         dictGetter = line.split("(")[-1].split(")")[0]
 
-        for i in dictOfDicts:
-            print(dictOfDicts[i])
-
-
-    def randFive(self):
-        global rightRand
-        global randomVarF
-
-        randomVar = str(randrange(1, 6))
-        randomList.append(randomVar)
-        randomVarF = str(randomList[0])
-        #leftRand = str(w[0])
-        #rightRand = str(w[-1])
-
-        #varDict[str(w[0])] = randomVarF
+       # for i in dictOfDicts:
+        #    print(dictOfDicts[i])
 
 
     def randTen(self):

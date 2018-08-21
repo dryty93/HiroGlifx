@@ -28,6 +28,8 @@ def progress_scorer():
                 line = line.rsplit("    ")[-1].split('\n')[0]
             if '[x]' in line:
                 complete_items += 1
+            if '[x]' not in line:
+                print(line)
             if ':' in line:
                 section_complete_items = complete_items
 

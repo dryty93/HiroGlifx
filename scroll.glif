@@ -4,13 +4,13 @@ $ money var $=alot
 # sum var #=2 + 44444
 $ n var $=er
 list numbers = 1, 2, 3
+write(list numbers)
 !if(3==3)!{
-write($ n var $)
+write($ money var $)
 }
 dict sign = libra>october, virgo>september, may>taurus
+index(dict sign:2)
 dict name = Joshua>Dryden, Tobe>Uwaechina, Tyler-Joshua>Dryden
-index(dict name:2)
-index(dict sign:3)
 $ o var $= ll
 write(dict name)
 brk
