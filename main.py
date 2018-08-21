@@ -5,6 +5,7 @@ from lib_funcs import Lib_Funcs
 from loops import loopThrough
 from bool_logic import Bools
 from lineCount import line_location
+from user_defined_functions import Functions
 
 import time
 
@@ -35,6 +36,7 @@ class StartInterpret():
             with open('scroll.glif', 'r') as readFile:
 
                 self.readFile = readFile
+                self.line_list = line_list
 
                 for line in readFile:
                     self.line = line
@@ -45,8 +47,10 @@ class StartInterpret():
 
                     var = Variable()
 
+
                     if '/*' in self.line:
                         self.line = next(self.readFile)
+
 
                     if 'loop_through' in line:
                         self.line = self.line + next(self.readFile)
@@ -64,16 +68,18 @@ class StartInterpret():
                                 if 'list' not in self.line:
                                     if 'dict' not in self.line:
                                         Variable().newVariable()
-
+                    if 'def func' in self.line:
+                        Functions().init_function()
                     if 'write' in line:
-
-                        Lib_Funcs().write()
+                        if 'func' not in line:
+                            Lib_Funcs().write()
                     if 'index' in line:
                         Dictionary().init_indexDict()
                     if 'brk' in line:
                       #  print(line_location)
 
                         exit()
+
 
 
 StartInterpret().initialize_interpreter()

@@ -22,7 +22,7 @@ class Lib_Funcs():
             function_state += 1
         # this writes simple text to screen
         if '!' not in line:
-            if "," not in line:
+            if ",," not in line:
                 if 'var' not in line:
                     if '#' not in line:
                         if '$' not in line:

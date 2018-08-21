@@ -1,5 +1,6 @@
 line_location = []
 def countLines():
+    global count_lines
     count_lines = 0
     with open('scroll.glif', 'r') as readFile:
        # n = [line for line in readFile if '!' and 'var' in line]
@@ -16,5 +17,5 @@ def countLines():
     for i in range(len(line_location)):
         pass
     #    print(line_location[i])
-   # print(line_location)
+
 countLines()

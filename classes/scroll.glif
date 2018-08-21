@@ -1,0 +1,18 @@
+/* this is how a blueprint will be created. Your parameters will need to be placed
+/* after a special keyword 'all_yourblueprintname+s_have' within parenthesis.
+/* this will follow curly braces to enclose all functions
+
+&BluePrint for Persons&
+all_persons_have(names, birthdays)
+{
+def func tell_persons_name()
+{
+write(Persons.name)
+write(Persons.birthday)
+}
+
+def func tell_persons_age()
+{
+write(Persons.age)
+}
+}
