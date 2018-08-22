@@ -45,7 +45,7 @@ Functions[3/5]:
     random[x]
     write[x]
     iteration number [x]
-    user function parameter recognition & retrieval []
+    user function parameter recognition & retrieval [x]
     function declaration [x]
     basic implementation @inside@[x]
     string split []

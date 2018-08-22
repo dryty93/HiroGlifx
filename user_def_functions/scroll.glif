@@ -1,5 +1,10 @@
-def func write_me(x,a,b){
-    x+a+b
+/* HiroGlifx functions accept up to 5 parameter values.
+
+# num var #= 4
+
+def func calculate(x,n,y)
+    {
+    x+ny
     }
-write_me func(3,5,6)
+calculate func(300,40,5)
 brk

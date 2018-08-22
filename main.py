@@ -80,6 +80,4 @@ class StartInterpret():
 
                         exit()
 
-
-
 StartInterpret().initialize_interpreter()

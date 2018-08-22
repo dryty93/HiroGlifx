@@ -14,7 +14,7 @@ dict jane =3>f, 22>d, 33>ff, 33>54
 write(no)
 }
 dict fane =ty>dry, to>uwae, jo>dry, tr>dry
-write(dict fane)
+write(dict name)
 
 /* this will check the dict you are referencing for the specified key and return the value
 name^r

@@ -101,7 +101,6 @@ class Bools():
                 logical_operator = line.split("#")[1].split("var")[-1]
                 condition_to_validate_left = "' "+line.split("==")[0].split("(")[-1] + "# '"
                 condition_to_validate_right = line.split("==")[-1].split(")")[0]
-            #print(condition_to_validate_right,'wtf')
                 Variable().varLookUp(condition_to_validate_left)
                 condition_to_validate_left = var_look_up_list[0]
                 Variable().varLookUp(condition_to_validate_right)
