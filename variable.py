@@ -66,6 +66,10 @@ class Variable():
             if '$^' in varName:
                 uIOut()
             varVal = line.split('=')[-1]
+            if '$^' in str(varVal):
+                Variable.varLookUp(self,varVal)
+                varVal = var_look_up_list[-1]
+
             if '\n' in varVal:
                 varVal = varVal.split("\n")[0]
             if "$" in varName and "$^" not in varName:
@@ -88,12 +92,49 @@ class Variable():
                 # Checks if the variable type is num/int and evaluates it if the variable type
                 #is a num/int.
 
+                logic_operators = ["+", "*", "**","****" "/", "-"]
 
-                if is_num and 'rand' not in varVal:
+
+                if is_num and 'rand' and 'var' not in varVal:
                     if "+" or "*" or "/" or '**' or "-" or ('***') in varVal:
                         varVal = eval(varVal)
 
                         list_of_ints.append(varVal)
+
+                if 'var' in str(varVal):
+                    for operators in logic_operators:
+                        if operators in str(varVal):
+                            var_concatenated_expression = str(varVal).split(operators)
+                            for i in var_concatenated_expression:
+                                if 'var' in i:
+                                    Variable.varLookUp(self,i)
+                                    new_var = var_look_up_list[-1]
+                                    i = new_var
+                                    if 'var' not in str(new_var):
+                                        new_expression = varVal.replace("var", str(i))
+                                        new_expression = new_expression.replace("#"," ")
+                                        new_expression = new_expression.split(' ')
+                                        for items in new_expression:
+                                            if items == '':
+                                                if not items.isalpha():
+                                                    if not items.isdigit():
+                                                        if "+" or "-" or '/' or '*' or '**' or '***' not in items:
+                                                            new_expression.remove(items)
+
+
+                                        new_expression = new_expression[0:-2]
+                                        for items in new_expression:
+                                            if items.isalpha():
+                                                new_expression.remove(items)
+                                            if items is None:
+                                                new_expression.remove(items)
+
+                                        new_expression = ''.join(new_expression)
+                                       # print(new_expression)
+                                        new_expression = eval(new_expression)
+
+                                        varVal = new_expression
+
 
             if 'bool' in varName:
                 if (">") or ("<") or ("==") in varVal:

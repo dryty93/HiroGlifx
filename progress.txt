@@ -34,7 +34,7 @@ Memory [5/11]:
     string memory retrieval [x]
     num memory retrieval [x]
     dictionary memory retrieval by name[x]
-    dictionary memory retrieval by key and val[]
+    dictionary memory retrieval by key and val[p]
     class storage []
     class instance storage []
     class functions storage []

@@ -1,5 +1,13 @@
-# n var #= 2
-# x var #= 4 + # n var #
+/* variables that use other variables to evaluate their value need a numerical value
+/* to appear first in the expression. If none is needed simply use 0 as a place holder
+/* If you nrrf to subtract a value from an unknown number and
+/* end up with a negative value simply multiply it by -1 to convert it to a positive value
 
-write(# n var # + # x var #)
+$^ degree_convert var ^$=UI(Enter a temperature in Fahrenheit to convert to Celsius:)
+# farenheit var #= $^ degree_convert var ^$
+# initConv var #= 32 - # farenheit var #
+# negConv var #= 5/9 * # initConv var #
+# celsius var #=  -1  * # negConv var #
+write(converting....)
+write(# celsius var #)
 brk
