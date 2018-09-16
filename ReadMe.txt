@@ -1,5 +1,8 @@
 HIROGLIFX
 
+** due to updates a lot of this manual is deprecated. I am updating the
+** docs as quickly as possible, but if you are unsure about what currently works
+** please consult the Progress.txt file or Progress Stats.py
 
 Table of Contents:
 
@@ -9,6 +12,9 @@ Table of Contents:
 4: Decorators and Variable Declaration
 5: Keywords
 6: UI (User Input)
+7: Loops
+8: User Generated Functions
+9: BluePrints
 
 1.What is HIROGLIFX?
 
@@ -18,15 +24,14 @@ It's basic rules are as followed.
 
 2. Creating a HIROGLIFX project
 
-To start a HIROGLIFX project simply create a subdirectory within the root directory.
-Next copy and paste the start.py file into your directory and create a scroll.glif file.
-All code for your project goes into this file.Run the start.py file to see what your
+To start a HIROGLIFX project simply work within the scroll.glif file within the root directory.
+All code for your project goes into this file.Run the main.py file to see what your
 code outputs.
 
 ** Note scrolls (scroll.glif files) are automatically generated within a while loop for your convenience
-** If you need to break out of the loop simply use the <BRK> keyword within an @INSIDE@ boolean
+** If you need to break out of the loop simply use the brk keyword within an @inside@ boolean
 statement.(check the scroll file in the Hello World folder in this directory for an example)
-***. If this file did not contain the <BRK> keyword it would run in an infinite loop
+***. If this file did not contain the brk keyword it would run in an infinite loop
 ***(which would be annoying).
 
 3. Ints(Nums) & Strings
@@ -46,8 +51,8 @@ Be sure that the closing decorator and equal sign have no space between them.
 
 Variable Declaration Examples:
 
-# X VAR#= 3
-$ NAME VAR$= "Noah"
+# x var #= 3
+$ name var $= "Noah"
 
 As you can see variable names are capitalized within the structure (Decorator Variable_Name VARDecorator=). Also strings need
 quotations to be stored in memory. You can get a variable's data by typing (Decorator VARNAME VAR). 
@@ -57,39 +62,58 @@ quotations to be stored in memory. You can get a variable's data by typing (Deco
 There are many keywords that are used for specific circumstances within HIROGLIFX. All keywords are capitalized
 within HIRO for readability purposes. They are as followed:
 
-WRITE():
+write():
 
 To print to the terminal use the keyword WRITE(). You can write all data types, and the values of variables that have already been
 declared.
 
-!IF!{}:
+!if!{}:
 
-!IF()!{} is the construction for an if statement within HIRO. The proper structure is as follows:
+!if()!{} is the construction for an if statement within HIRO. The proper structure is as follows:
 
-!IF (CONDITION)!{EXECUTE THIS()}
+!if (CONDITION)!{EXECUTE THIS()}
 
 As you can see the if statement checks the condition within the logical decorator (!!) and executes the code within the
 {} if this condition evaluates to True.
 
+** IF-NOT is deprecated
 !IF-NOT()!{} checks if a condition is not true and executes the condtion within the {} if this is the case.
 It is the main form of negation within HIROGLIFX.
 
 !IF-NOT(2 < 1)!{EXECUTE THIS()}
 
-@INSIDE@:
+@inside@:
 This keyword checks whether a string variable is inside of another string variable.
 
 $ FIRSTSTRING VAR $=New
 $ SCNDSTRING VAR $=N
 
-!IF( $ SCNDSTRING VAR $ @INSIDE@ $ FIRSTSTRING VAR $)!{WRITE{'FOUND N')}
+!IF( $ SCNDSTRING var $ @inside@ $ FIRSTSTRING var $)!{WRITE{'FOUND N')}
 
-<BRK>:
+brk:
 
-The <BRK> keyword is used to break out of loops. It needs to be given an if condition and it executes when this condition
+The brk keyword is used to break out of loops. It needs to be given an if condition and it executes when this condition
 is satisfied.
 
 6. User Input
 
-User Input is gathered by using the UI(' ') command. 
+User Input is gathered by using the UI(' ') command. A user's input can be saved to a
+variable using the following syntax:
 
+$^ n var ^$= UI(What is your name?")
+
+After saving this variable you can treat it like any other variable to perform
+operations as you desire.
+
+7. Loops
+
+HiroGlifx currently offers one type of loop, a "loop_through" loop that is similar to a for loop.
+Being that HiroGlifx is automatically generated within a while loop, a while loop
+is never necesary to run HiroGlifx. Here is an example of a loop_through loop.
+
+loop_through(val=3:data_store=x){
+write(3), write(u)
+
+The val variable represents the amount of iterations that you want to occur on a piece
+of data, data store stores the data of each iteration during the time of each
+iteration.
