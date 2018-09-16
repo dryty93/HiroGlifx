@@ -48,6 +48,8 @@ class Lib_Funcs():
                         pass
                 if 'var' in line:
                     Variable().writeVar()
+            if ',,' in line:
+                print('multiple values')
 
     def writeDict(self):
 

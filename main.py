@@ -6,6 +6,7 @@ from loops import loopThrough
 from bool_logic import Bools
 from lineCount import line_location
 from user_defined_functions import Functions
+from user_blueprints import UserBP
 
 import time
 
@@ -70,6 +71,11 @@ class StartInterpret():
 
                     if '^' in self.line:
                         self.dict_look_up.append(line)
+
+                    if 'BluePrint' in line:
+                        UserBP.bp_find_name(self,line)
+                    if 'have' in line:
+                        UserBP.bp_get_attributes(self,line)
 
                     if 'var' in self.line:
                         if '!' not in self.line:

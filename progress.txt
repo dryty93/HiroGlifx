@@ -7,7 +7,7 @@ Syntax [5/5]:
     variable expression handling [x]
 
 Control Flow [2/5]:
-    loop control []
+    loop control [x]
     LN keyword []
     user generated loop [x]
     if statement [x]
@@ -35,7 +35,7 @@ Memory [5/11]:
     num memory retrieval [x]
     dictionary memory retrieval by name[x]
     dictionary memory retrieval by key and val[p]
-    class storage []
+    class storage [x]
     class instance storage []
     class functions storage []
     class variable storage []
@@ -75,5 +75,5 @@ Error Handling[3/7]:
     only two write statements can be applied to an if statement[]
     if statement cannot yet evaluate a variable against a regular number [x]
     variables only work in if clauses when the two conditions being evaluated are 2 variables or when the variable is on the right []
-    Dictionary refs need their own look_up funciton []
+    Dictionary refs need their own look_up function []
 
