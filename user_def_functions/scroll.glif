@@ -1,10 +1,19 @@
 /* HiroGlifx functions accept up to 5 parameter values.
 
 # num var #= 4
-
-def func calculate(x,n,y)
+def func add()
     {
-    x+ny
+    r = tttt
+    write(Hi)
+    write(to)
+    loop_through(need)rere
+    oih
     }
-calculate func(300,40,5)
+
+def func subtract(x,y)
+    {
+    x-y
+    }
+/*subtract_funct(2,3)
+subtract_function(22,3)
 brk

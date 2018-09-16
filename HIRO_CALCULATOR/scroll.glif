@@ -1,7 +1,5 @@
 $^ state var ^$=UI( ENTER EQUATION)
 $ ex var $=EXIT
-!if( $^ state var ^$ @inside@ $ ex var $ )!{
-brk}
 # a var #= 1
 # b var #= 2
 write(|HIRO_CALCLATOR|)

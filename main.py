@@ -33,10 +33,14 @@ class StartInterpret():
 
 
             line_list = []
+            dict_look_up = []
             with open('scroll.glif', 'r') as readFile:
 
                 self.readFile = readFile
                 self.line_list = line_list
+
+                self.dict_look_up = dict_look_up
+
 
                 for line in readFile:
                     self.line = line
@@ -58,10 +62,15 @@ class StartInterpret():
                     if '!' in self.line:
                         Bools().ifs_init()
                     if 'dict' in self.line:
+
                         if 'write' not in self.line:
                             if '!' not in self.line:
                                 if 'index' not in line:
                                     Dictionary().dictMaker()
+
+                    if '^' in self.line:
+                        self.dict_look_up.append(line)
+
                     if 'var' in self.line:
                         if '!' not in self.line:
                             if 'write' not in self.line:
@@ -70,11 +79,13 @@ class StartInterpret():
                                         Variable().newVariable()
                     if 'def func' in self.line:
                         Functions().init_function()
+
                     if 'write' in line:
                         if 'func' not in line:
                             Lib_Funcs().write()
                     if 'index' in line:
                         Dictionary().init_indexDict()
+
                     if 'brk' in line:
                       #  print(line_location)
 

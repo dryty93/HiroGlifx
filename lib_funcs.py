@@ -1,10 +1,14 @@
 from dictionary import Dictionary,dictOfDicts
 from variable import Variable, varCount,varNameList
 from random import randrange
-
 class Lib_Funcs():
     def __init__(self):
         pass
+
+    def write_function_in_functions(self,content_to_write):
+        content_to_write = content_to_write.split("write")
+        print(content_to_write)
+
 
     def write(self):
         global function_state
@@ -16,6 +20,8 @@ class Lib_Funcs():
         # the code will execute and the function state keeps track of the iterations the code
         # runs to see if it is necesarry to import line again
         function_state = 0
+
+
         if function_state == 0:
 
 #            print(line, 'line here')
@@ -28,7 +34,8 @@ class Lib_Funcs():
                         if '$' not in line:
                             if 'dict' not in line:
                                 if 'list' not in line:
-                                    writeThis = line.split("(")[-1].split(')')[0]
+                                    if '    ' not in line:
+                                        writeThis = line.split("(")[-1].split(')')[0]
                                     if "+" or "-":
                                         print(writeThis)
                                 if 'list' in line:

@@ -1,19 +1,19 @@
-HIROGLIFX Requirements[24/59]
-Syntax [3/5]:
+HIROGLIFX Requirements[33/60]
+Syntax [5/5]:
     new line ignored [x]
-    multiple one line executions for single conditional []
+    multiple one line executions for single conditional [x]
     comments[x]
     expression handling [x]
     variable expression handling [x]
 
-Control Flow [2/4]:
+Control Flow [2/5]:
     loop control []
     LN keyword []
     user generated loop [x]
     if statement [x]
     if-not statement []
 
-Data Structures [2/8]:
+Data Structures [6/13]:
     nums and string var declaration [x]
     data_store var declaration []
     basic implementation string [x]
@@ -23,25 +23,26 @@ Data Structures [2/8]:
     basic implementation classes []
     basic implementation list []
     basic implementation dictionaries/hash maps [x]
-    dictionary indexing []
+    dictionary look up []
     list indexing[]
     instant variable conversion [x]
     importing code []
 
-Memory [1/4]:
+Memory [5/11]:
     garbage collection []
     var memory retrieval [x]
     string memory retrieval [x]
     num memory retrieval [x]
-    dictionary memory retrieval by name[]
+    dictionary memory retrieval by name[x]
+    dictionary memory retrieval by key and val[]
     class storage []
     class instance storage []
     class functions storage []
     class variable storage []
     class linkage storage []
-    function name space storage []
+    function name space storage [x]
 
-Functions[3/5]:
+Functions[6/10]:
     random[x]
     write[x]
     iteration number [x]
@@ -52,24 +53,27 @@ Functions[3/5]:
     string join []
     math pi function []
     math area function []
+    var declaration in function []
+    clear scope handling of variables in function[]
 
-Error Handling[]:
+Error Handling[3/7]:
     incorrect str variable declaration[x]
     incorrect num variable declaration[x]
     incorrect bool variable declaration[x]
     incorrect dictionary syntax[]
     incorrect line syntax[]
-    incorrect dictionary index syntax[]
+    incorrect dictionary key syntax[]
     undefined values []
 
- Bugs[1/2]:
+ Bugs[6/9]:
     dict is not printed in proper hiro syntax [x]
     vars and dicts cant be declared after comment[x]
    *only strings work now * vars not written in if statements [x]
-    nums not written in if statements[]
+    nums not written in if statements[x]
     loop_through data store does not update or hold data []
-    comments affect variables value[]
+    comments affect variables value[x]
     only two write statements can be applied to an if statement[]
-    if statement cannot yet evaluate a variable against a regular number []
-
+    if statement cannot yet evaluate a variable against a regular number [x]
+    variables only work in if clauses when the two conditions being evaluated are 2 variables or when the variable is on the right []
+    Dictionary refs need their own look_up funciton []
 

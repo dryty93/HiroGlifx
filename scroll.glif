@@ -9,8 +9,7 @@ write(list numbers)
 write($ money var $)
 }
 dict sign = libra>october, virgo>september, may>taurus
-index(dict sign:2)
+sign^libra
 dict name = Joshua>Dryden, Tobe>Uwaechina, Tyler-Joshua>Dryden
 $ o var $= ll
-write(dict name)
 brk

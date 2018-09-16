@@ -1,25 +1,21 @@
 $ b var $=Hi
 
-# l var #= rand10
+# l var #= 4
 
 # h var #= 44
 
-dict name =r>d, m>d, n>d, 4>8
+dict name = r>ee, m>AA, n>d, 1>33
 
-write(# l var #)
+dict jane = 3>f, 22>d, 33>ff, 33>54
 
-dict jane =3>f, 22>d, 33>ff, 33>54
+name^ n
 
-!if(w @inside@ weed){
-write(no)
+!if(# l var # < # h var #){
+write(ok)
 }
 dict fane =ty>dry, to>uwae, jo>dry, tr>dry
-write(dict name)
+write(dict fane)
 
 /* this will check the dict you are referencing for the specified key and return the value
-name^r
 
-!if(3 > 1)!{
-write( $ b var $)
-}
 brk

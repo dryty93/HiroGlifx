@@ -20,6 +20,9 @@ class Variable():
         from lib_funcs import Lib_Funcs
 
         line = StartInterpret.line
+        if 'function' in str(varVal):
+            print(varVal)
+
         if 'rand' in str(varVal):
 
             random_var_name = line.split("=")[0]
@@ -128,6 +131,7 @@ class Variable():
             else:
                 pass
               #  print(var_key_check,varDict)
+       # print(var_look_up_list,'var_lookUp_list')
 
 
 if __name__=='__main__':

@@ -112,10 +112,13 @@ class Dictionary():
         """This functions creates an index for the dictionary
         in proper HiroGlifx syntax and returns it to the user"""
         from main import StartInterpret
+    # introduced new bug. Now user has to reference dictionary if dictionaries are
+    # created. Need to fix this immediately.
 
         line = StartInterpret.line
+        dict_look_up = StartInterpret.dict_look_up
+        dict_look_up = dict_look_up[0].split('^')[-1].split("\n")[0]
         written_hiro_dictionary_name_by_itself = line.split("dict")[-1].split("\n")[0].split(" ")[-1].split(")")[0]
-       # print('dict',hiro_dicts_name_list[1],'=',dict_of_hi_dicts[written_hiro_dictionary_name_by_itself],'ok',dict_of_hi_dicts_final_conversion.keys())
         for items in dict_of_hi_dicts_final_conversion.keys():
             if written_hiro_dictionary_name_by_itself in items:
                 dictionary_initial_index = 'dict '+ items +' ='+dict_of_hi_dicts_final_conversion[items]
@@ -126,6 +129,7 @@ class Dictionary():
                     count_keys == 0)
         count_hi_dicts_key_val_map_preparer = [key for key in hi_dicts_key_val_map_preparer if
                                                count_hi_dicts_key_val_map_preparer_function]
+#        print(count_hi_dicts_key_val_map_preparer)
         for i in range(len(count_hi_dicts_key_val_map_preparer)):
             if i <= len(count_hi_dicts_key_val_map_preparer):
                 hiro_key_val_map[count_hi_dicts_key_val_map_preparer[i].split(">")[0]] = count_hi_dicts_key_val_map_preparer[i].split(">")[-1]
@@ -133,7 +137,7 @@ class Dictionary():
         # need to implement something so that the interpretter takes the users requested key
         # looks it up against the dictionary and returns the proper dictionary item. Right now
         try:
-            print(hiro_key_val_map['r'])
+            print(hiro_key_val_map[dict_look_up])
         except:
             exit('HiroGlifx Interpretter: Key-Val Error: \nSpecified Key Not Found!')
 

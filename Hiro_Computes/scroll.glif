@@ -1,0 +1,5 @@
+# n var #= 2
+# x var #= 4 + # n var #
+
+write(# n var # + # x var #)
+brk
