@@ -70,6 +70,7 @@ class Functions():
 
         global readFile
         from main import StartInterpret
+        from variable import Variable
         readFile = StartInterpret.readFile
         line = StartInterpret.line
         expression_line = []
@@ -96,30 +97,40 @@ class Functions():
 
 
         replace = [i for i in parameter_find if i.isalpha()]
-        print(expression_line,'el')
+    #    print(expression_line,'el',replace)
         for i in range(len(get_parameter_initial_values)):
             function_dictionary[function_name] = {}
             for i in range(len(replace)):
                 if len(get_parameter_initial_values) > i:
                     function_dictionary[function_name][replace[i]] = get_parameter_initial_values[i]
                 else:
-                    function_dictionary[function_name][replace[i]] = expression_line
-        for i in function_do:
-            try:
-                if i  in function_dictionary[function_name][i]:
-                    print(i)
-            except:
-                    # i need to update final_function when it sees a different logical operator
+                   function_dictionary[function_name][replace[i]] = expression_line
 
-                    final_function = (str(get_parameter_initial_values).replace(',',i))
-                    final_function = final_function.replace("'"," ")
-                    return_this = (eval(final_function))
-                    return_this =[answer for answer in return_this]
 
-        try:
-            print(return_this[0])
-        except:
-            print(final_function)
+       # print(get_parameter_initial_values)
+
+        final_function = function_do
+        end = []
+
+
+        for i in final_function:
+            for k in function_dictionary[function_name]:
+                if k in i:
+                    end.append(function_dictionary[function_name][i])
+
+            if i not in function_dictionary[function_name].keys():
+                end.append(i)
+
+
+        final_function = "".join(end)
+        return_this = (eval(final_function))
+        if '=' in line:
+            data_storage = line.split("@ds")
+
+            var_name = data_storage[1].split("var")[0].split(" ")[1]
+            var_data = return_this
+            Variable().func_var_creation(var_name, var_data)
+
 
 
 

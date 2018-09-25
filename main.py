@@ -74,8 +74,13 @@ class StartInterpret():
 
                     if 'BluePrint' in line:
                         UserBP.bp_find_name(self,line)
+
+
                     if 'have' in line:
                         UserBP.bp_get_attributes(self,line)
+
+
+
 
                     if 'var' in self.line:
                         if '!' not in self.line:

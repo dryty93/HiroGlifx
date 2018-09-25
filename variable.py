@@ -114,6 +114,7 @@ class Variable():
                                         new_expression = varVal.replace("var", str(i))
                                         new_expression = new_expression.replace("#"," ")
                                         new_expression = new_expression.split(' ')
+                                        print(new_expression)
                                         for items in new_expression:
                                             if items == '':
                                                 if not items.isalpha():
@@ -123,17 +124,20 @@ class Variable():
 
 
                                         new_expression = new_expression[0:-2]
+                                        print(new_expression)
+
                                         for items in new_expression:
                                             if items.isalpha():
                                                 new_expression.remove(items)
                                             if items is None:
                                                 new_expression.remove(items)
 
+
                                         new_expression = ''.join(new_expression)
                                        # print(new_expression)
-                                        new_expression = eval(new_expression)
+                                   #     new_expression = eval(new_expression)
 
-                                        varVal = new_expression
+                                   #     varVal = new_expression
 
 
             if 'bool' in varName:
@@ -171,10 +175,14 @@ class Variable():
                 Variable.varLookUp.var_value = var_look_up_list[-1]
             else:
                 pass
-              #  print(var_key_check,varDict)
-       # print(var_look_up_list,'var_lookUp_list')
 
+    def func_var_creation(self,name, value):
 
+        if type(value) == int:
+            name = "# " + name +" var " +"#"
+        elif type(value) == str:
+            name = "$ " + name +" var" +" $"
+        varDict[name] = value
 if __name__=='__main__':
     print("Variable Class:"
           "\nThis module is used to create and handle variables."

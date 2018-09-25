@@ -1,19 +1,37 @@
 /* HiroGlifx functions accept up to 5 parameter values.
 
-# num var #= 4
-def func add()
+# num var #= 1
+
+def func subtract(x,y,n,i)
     {
-    r = tttt
-    write(Hi)
-    write(to)
-    loop_through(need)rere
-    oih
+    x**y+n*i*i-i**x
+    @ds sub_holder var @ds= subtract_func(2,2,4,33)
     }
 
-def func subtract(x,y)
+
+def func add(x,y)
     {
-    x-y
+    x+y
+    @ds add_hold var @ds= add_func(5,4)
+
     }
-/*subtract_funct(2,3)
-subtract_function(22,3)
+
+def func multiply(x,y)
+    {
+    x*y
+    @ds mult_holder var @ds = multiply_func(2,2)
+    }
+
+write(# no var #)
+
+def func divide(x,y)
+    {
+    x/y
+    @ds div_hold var @ds= divide_func(8,2)
+    }
+
+!if(# sub_holder var # > 1)!{
+write(# sub_holder var #)
+}
+write(# div_hold var #)
 brk
