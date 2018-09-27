@@ -1,0 +1,17 @@
+/* a = amount, c = county_sales_tax, t = tip
+*$^ take var ^$=UI(How much was your meal?)
+# ee var #= $^ take var ^$
+
+def func getTax(a,c,t)
+    {
+    a * c + a * t + a
+    @ds total var @ds= getTax_func(40,.07,.15)
+    }
+
+write(Your total amount is,,$,,# total var #)
+brk
+
+/* title: tip_tax_total
+/* project: HiroGlifx
+/* copyright: 2018 Dryden Inc.
+/* author: Tyler-Joshua Dryden

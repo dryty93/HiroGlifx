@@ -68,8 +68,10 @@ class Variable():
             varVal = line.split('=')[-1]
             if '$^' in str(varVal):
                 Variable.varLookUp(self,varVal)
-                varVal = var_look_up_list[-1]
-
+                try:
+                    varVal = var_look_up_list[-1]
+                except:
+                    pass
             if '\n' in varVal:
                 varVal = varVal.split("\n")[0]
             if "$" in varName and "$^" not in varName:
@@ -97,8 +99,8 @@ class Variable():
 
                 if is_num and 'rand' and 'var' not in varVal:
                     if "+" or "*" or "/" or '**' or "-" or ('***') in varVal:
-                        varVal = eval(varVal)
 
+                        varVal = eval(varVal)
                         list_of_ints.append(varVal)
 
                 if 'var' in str(varVal):
@@ -111,10 +113,13 @@ class Variable():
                                     new_var = var_look_up_list[-1]
                                     i = new_var
                                     if 'var' not in str(new_var):
-                                        new_expression = varVal.replace("var", str(i))
-                                        new_expression = new_expression.replace("#"," ")
-                                        new_expression = new_expression.split(' ')
-                                        print(new_expression)
+                                        try:
+                                            new_expression = varVal.replace("var", str(i))
+                                            new_expression = new_expression.replace("#"," ")
+                                            new_expression = new_expression.split(' ')
+                                        except:
+                                            pass
+                                       # print(new_expression)
                                         for items in new_expression:
                                             if items == '':
                                                 if not items.isalpha():
@@ -124,7 +129,7 @@ class Variable():
 
 
                                         new_expression = new_expression[0:-2]
-                                        print(new_expression)
+                                        #print(new_expression)
 
                                         for items in new_expression:
                                             if items.isalpha():
@@ -134,10 +139,11 @@ class Variable():
 
 
                                         new_expression = ''.join(new_expression)
-                                       # print(new_expression)
-                                   #     new_expression = eval(new_expression)
 
-                                   #     varVal = new_expression
+                                        try:
+                                            varVal = eval(new_expression)
+                                        except:
+                                            pass
 
 
             if 'bool' in varName:
@@ -170,19 +176,20 @@ class Variable():
 
         for keys in varDict:
             if keys in var_key_check:
-                var_value =varDict[keys]
+                var_value = varDict[keys]
                 var_look_up_list.append(var_value)
-                Variable.varLookUp.var_value = var_look_up_list[-1]
-            else:
-                pass
+        return var_look_up_list
 
     def func_var_creation(self,name, value):
 
         if type(value) == int:
             name = "# " + name +" var " +"#"
+        if type(value) == float:
+            name = "# " + name + " var " + "#"
         elif type(value) == str:
             name = "$ " + name +" var" +" $"
         varDict[name] = value
+
 if __name__=='__main__':
     print("Variable Class:"
           "\nThis module is used to create and handle variables."

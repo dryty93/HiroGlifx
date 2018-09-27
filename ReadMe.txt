@@ -8,13 +8,14 @@ Table of Contents:
 
 1:What is HIROGLIFX?
 2:Creating a HIROGLIFX project
-3:Ints & Strings
-4: Decorators and Variable Declaration
-5: Keywords
-6: UI (User Input)
-7: Loops
-8: User Generated Functions
-9: BluePrints
+3:Data Structures
+4:Ints & Strings
+5: Decorators and Variable Declaration
+6: Keywords
+7: UI (User Input)
+8: Loops
+9: User Generated Functions
+10: BluePrints
 
 1.What is HIROGLIFX?
 
@@ -34,14 +35,26 @@ statement.(check the scroll file in the Hello World folder in this directory for
 ***. If this file did not contain the brk keyword it would run in an infinite loop
 ***(which would be annoying).
 
-3. Ints(Nums) & Strings
+3. Data Structures:
+
+The HiroGlifx interpretter recognizes multiple data types for abstraction purposes. These include hashed dicts, arrays, strings,
+nums, and floats. Hashed dicts are hashmaps built that utilize simple syntax for less verbose writing. The declaration for a
+hashed dict is as follows:
+
+dict fane =ty>dry, to>uwae, jo>dry, tr>dry /* hashed dict declaration. Use a > to map a key to a value
+
+fane^ty /* this causes the key look up functionality to take place.
+ /* the fane hashed dict returns the value based on the given key in the statement.
+ /* This can also be stored in a variable.
+
+4. Ints(Nums) & Strings
 
 Ints or Nums are described as integers that do not contain a decimal point.
 They can perform various operations including addition, subtraction, etc.
 All Strings are ASCII characters not including numbers contained within a
 pair of "".
 
-4. Decorators & Variable Declaration
+5. Decorators & Variable Declaration
 
 Decorators are simply ASCII characters reserved for specific operations or uses in HIRO.
 The ! decorator is used to express a conditional statement. These include if and else statements.
@@ -57,7 +70,7 @@ $ name var $= "Noah"
 As you can see variable names are capitalized within the structure (Decorator Variable_Name VARDecorator=). Also strings need
 quotations to be stored in memory. You can get a variable's data by typing (Decorator VARNAME VAR). 
 
-5. Keywords
+6. Keywords
 
 There are many keywords that are used for specific circumstances within HIROGLIFX. All keywords are capitalized
 within HIRO for readability purposes. They are as followed:
@@ -95,7 +108,8 @@ brk:
 The brk keyword is used to break out of loops. It needs to be given an if condition and it executes when this condition
 is satisfied.
 
-6. User Input
+
+7. User Input
 
 User Input is gathered by using the UI(' ') command. A user's input can be saved to a
 variable using the following syntax:
@@ -105,7 +119,8 @@ $^ n var ^$= UI(What is your name?")
 After saving this variable you can treat it like any other variable to perform
 operations as you desire.
 
-7. Loops
+
+8. Loops
 
 HiroGlifx currently offers one type of loop, a "loop_through" loop that is similar to a for loop.
 Being that HiroGlifx is automatically generated within a while loop, a while loop
@@ -117,3 +132,25 @@ write(3), write(u)
 The val variable represents the amount of iterations that you want to occur on a piece
 of data, data store stores the data of each iteration during the time of each
 iteration.
+
+9. User Defined Functions
+
+Functions can be defined in HiroGlifx with relative ease. A user defined function accepts up to 5 parameters, and
+accepts arguments whose output can be stored and returned using a Data Storage variable (eg. '@ds name var @ds'). This eliminates the use
+of global variables entirely allowing your code to run smoothly.
+
+A function is defined using the 'def func' keyword followed by the name of your function, in the function
+head. This follows open curly braces, that house the body of the function. The body of the function contains
+all operations and variable assignment.  See the example code below:
+
+def func getTax(a,c,t) /* function head
+    { /* function body
+    a * c + a * t + a
+    @ds total var @ds= getTax_func(40,.07,.15) /* Data Storage variable argument assignment
+    }  /* end of function
+
+write(Your total amount is,,$,,# total var #)
+ /* this write statement outputs the contents of the getTax function see below:
+['Your total amount is', '$', 48.8]
+
+The previous function calculates the total amount of a bill with sales tax and a %15 tip included.

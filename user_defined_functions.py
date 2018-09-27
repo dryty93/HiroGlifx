@@ -49,12 +49,13 @@ class Functions():
                 break
 
     def get_keywords(self):
+        global keywords
         keywords = ['loop_through', 'write', '$', '$^', '#', '@inside@', 'data_store', '&BluePrint&',
-                    'rand5', 'rand50', 'rand100', 'dict', 'def func', '!if', 'brk', 'UI', 'list']
+                    'rand5', 'rand50', 'rand100', 'dict', 'def func', '!if(', 'brk', 'UI', 'list']
+
 
         function_AST = [items for count,items in enumerate(function_contents) if keywords[count]
                         in items]
-        print(function_AST)
         #print(function_AST.count("each_keyword"))
         for items in function_AST:
             if 'write' in items:
@@ -71,9 +72,11 @@ class Functions():
         global readFile
         from main import StartInterpret
         from variable import Variable
+        from variable import var_look_up_list, varDict
         readFile = StartInterpret.readFile
         line = StartInterpret.line
         expression_line = []
+        function_body = 0
 
         if '\n' or '/*' in line:
             line = next(readFile)
@@ -82,12 +85,14 @@ class Functions():
             line = next(readFile)
             expression_line.append(line.split("\n")[0].split("  ")[-1])
 
-
+              #  print(expressions)
             if "    " in line:
+                function_body = True
+               # for words in keywords:
+                   # if words in line.split(" "):
+                  #    print(words)
                 function_do = [operators for operators in line.split("  ")[-1].split("\n")[0]]
                 line = next(readFile)
-                if '}' in line:
-                    line = next(readFile)
 
                 if 'func' not in line and '\n' in line or '/*' in line:
                     line = next(readFile)
@@ -97,7 +102,7 @@ class Functions():
 
 
         replace = [i for i in parameter_find if i.isalpha()]
-    #    print(expression_line,'el',replace)
+
         for i in range(len(get_parameter_initial_values)):
             function_dictionary[function_name] = {}
             for i in range(len(replace)):
@@ -119,8 +124,19 @@ class Functions():
                     end.append(function_dictionary[function_name][i])
 
             if i not in function_dictionary[function_name].keys():
-                end.append(i)
+                if '#' or '$' not in i:
+                    end.append(i)
+                if '#' or '$' in i:
+                    Variable().varLookUp(i)
 
+                    #end.append(var_look_up_list[0])
+
+#        print(end)
+        for items in end:
+            if 'var' in items:
+                    n = varDict[items]
+                    a = varDict[n]
+                    print(varDict.keys())
 
         final_function = "".join(end)
         return_this = (eval(final_function))
@@ -130,6 +146,7 @@ class Functions():
             var_name = data_storage[1].split("var")[0].split(" ")[1]
             var_data = return_this
             Variable().func_var_creation(var_name, var_data)
+
 
 
 

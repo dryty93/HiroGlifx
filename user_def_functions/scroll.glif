@@ -2,19 +2,29 @@
 
 # num var #= 1
 
+def func test n()
+    {
+    !if(2 > 1)!
+    {
+    write('no')
+    }
+    }
+
+
 def func subtract(x,y,n,i)
     {
-    x**y+n*i*i-i**x
+    x*y+n*i*i-i**x-n+i-x**i
+    # h var #= x
     @ds sub_holder var @ds= subtract_func(2,2,4,33)
     }
-
-
 def func add(x,y)
     {
-    x+y
+    x+y- 8
     @ds add_hold var @ds= add_func(5,4)
-
     }
+write(# add_hold var #)
+write(# new var #)
+
 
 def func multiply(x,y)
     {
@@ -30,8 +40,8 @@ def func divide(x,y)
     @ds div_hold var @ds= divide_func(8,2)
     }
 
-!if(# sub_holder var # > 1)!{
+!if(# sub_holder var # < # div_hold var #)!{
 write(# sub_holder var #)
 }
-write(# div_hold var #)
+write(#  var #)
 brk

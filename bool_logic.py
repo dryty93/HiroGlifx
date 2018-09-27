@@ -1,5 +1,5 @@
 from lib_funcs import Lib_Funcs
-
+from loops import loopThrough
 if_not_list = []
 if_list = []
 class Bools():
@@ -30,6 +30,8 @@ class Bools():
             if '@inside@' not in condition_to_validate:
                 truth_detection = eval(condition_to_validate)
                 if truth_detection:
+                    if 'loop' in code_to_execute:
+                        loopThrough()
                     if 'write' in code_to_execute and "$" or "!" not in code_to_execute:
                         try:
                             write_me = code_to_execute.split("(")[1].split(")")[0]
@@ -104,17 +106,14 @@ class Bools():
                                 Variable().varLookUp(write_me)
                                 print(var_look_up_list[-1])
             if '==' in line:
-                logical_operator = line.split("#")[1].split("var")[-1]
                 condition_to_validate_left = "' "+line.split("==")[0].split("(")[-1] + "# '"
                 condition_to_validate_right = line.split("==")[-1].split(")")[0]
                 Variable().varLookUp(condition_to_validate_left)
                 condition_to_validate_left = var_look_up_list[0]
                 Variable().varLookUp(condition_to_validate_right)
                 condition_to_validate_right = var_look_up_list[-1]
-                code_to_execute_var_convert = str(condition_to_validate_left) + logical_operator + str(condition_to_validate_right)
+                code_to_execute_var_convert = str(condition_to_validate_left) + '==' + str(condition_to_validate_right)
                 truth_detection = eval(code_to_execute_var_convert)
-               # if 'not' in line:
-                print(line,'line')
                 if truth_detection:
                     if 'write' in code_to_execute and "$" or "!" not in code_to_execute:
                         write_me = code_to_execute.split("(")[1].split(")")[0]

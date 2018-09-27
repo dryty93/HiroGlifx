@@ -24,6 +24,7 @@ def loopThrough():
 
         data_for_function = execution.split("(")[-1].split(")")
         data_for_function = data_for_function[0]
+
         if 'write' in execution:
             if ',' not in execution:
                 for i in range(int(iter_amount) - 1):
@@ -50,7 +51,6 @@ def loopThrough():
                             execute_items_final_list.append(items)
                         if items.isalpha():
                             execute_items_final_list.append(items)
-
 
 
 

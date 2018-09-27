@@ -1,5 +1,5 @@
 from dictionary import Dictionary,dictOfDicts
-from variable import Variable, varCount,varNameList
+from variable import Variable, varCount,varNameList,var_look_up_list
 from random import randrange
 class Lib_Funcs():
     def __init__(self):
@@ -49,8 +49,15 @@ class Lib_Funcs():
                 if 'var' in line:
                     Variable().writeVar()
             if ',,' in line:
-                print('multiple values')
-
+                write_mult = line.split('e(')[1].split(')')[0].split(',,')
+                multi_line_write_statement = []
+                for items in write_mult:
+                    if 'var' in items:
+                        Variable().varLookUp(items)
+                        multi_line_write_statement.append(var_look_up_list[-1])
+                    else:
+                        multi_line_write_statement.append(items)
+                print(multi_line_write_statement)
     def writeDict(self):
 
         dictGetter = line.split("(")[-1].split(")")[0]
@@ -78,13 +85,13 @@ class Lib_Funcs():
         global randomList
         global randomVarF
 
-        if 'RAND5' in line:
+        if 'rand5' in line:
             self.randFive()
 
-        if 'RAND100' in line:
+        if 'rand100' in line:
             self.randHun()
 
-        if 'RAND10' in line:
+        if 'rand10' in line:
             self.randTen()
 
 

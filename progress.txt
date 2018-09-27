@@ -76,4 +76,6 @@ Error Handling[3/7]:
     if statement cannot yet evaluate a variable against a regular number [x]
     variables only work in if clauses when the two conditions being evaluated are 2 variables or when the variable is on the right []
     Dictionary refs need their own look_up function []
+    function parameters cannot accept variables as arguments []
+
 
