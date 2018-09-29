@@ -134,11 +134,17 @@ class Functions():
 #        print(end)
         for items in end:
             if 'var' in items:
-                    n = varDict[items]
-                    a = varDict[n]
-                    print(varDict.keys())
+                    var_val_cross_reference = varDict[items]
+                   # var_val_cross_reference = varDict[var_val_cross_reference]
 
-        final_function = "".join(end)
+
+                    if '#' or '$' in var_val_cross_reference:
+                        if items in end:
+                            end = ''.join(end)
+                            end = end.replace(items,str(var_val_cross_reference))
+
+        final_function = ''.join(end)
+
         return_this = (eval(final_function))
         if '=' in line:
             data_storage = line.split("@ds")
@@ -146,11 +152,6 @@ class Functions():
             var_name = data_storage[1].split("var")[0].split(" ")[1]
             var_data = return_this
             Variable().func_var_creation(var_name, var_data)
-
-
-
-
-
 
 
 

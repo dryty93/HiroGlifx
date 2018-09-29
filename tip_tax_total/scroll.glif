@@ -1,11 +1,11 @@
 /* a = amount, c = county_sales_tax, t = tip
-*$^ take var ^$=UI(How much was your meal?)
-# ee var #= $^ take var ^$
+$^ grab_amt var ^$=UI(How much was your meal?)
+# amount var #= $^ grab_amt var ^$
 
 def func getTax(a,c,t)
     {
     a * c + a * t + a
-    @ds total var @ds= getTax_func(40,.07,.15)
+    @ds total var @ds= getTax_func(# amount var #,.07,.15)
     }
 
 write(Your total amount is,,$,,# total var #)

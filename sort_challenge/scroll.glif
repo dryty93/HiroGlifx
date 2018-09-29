@@ -1,0 +1,25 @@
+# x var #= 2
+# y var #= 3
+# i var #= 4
+
+# n var #= + # x var # + # y var # + # i var #
+
+write(# n var #)
+
+/* the above code will not produce the correct result. it is important to only assign a self.variable (variable that is assigned another var value)
+/* one variable at a time for evaluation purposes. For example # h var #= 2 + # m var #
+/* variables can accept unlimited amounts of raw integers and evaluate them/store their data. see example below
+
+# l var #= 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 233 / 3 + 112 ** 2 + + 1 + 1 + 1 + 1 # n var #
+
+write(# l =,,# l var #)
+
+/* to achieve this flexibility with unknown values, or just for reusability, use functions. see below:
+
+def func add(x,y,i)
+    {
+    x + y + i
+    @ds n var @ds= add_func(3,4,5)
+    }
+write(# n var #,, is the result of add)
+brk

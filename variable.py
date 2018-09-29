@@ -97,11 +97,11 @@ class Variable():
                 logic_operators = ["+", "*", "**","****" "/", "-"]
 
 
-                if is_num and 'rand' and 'var' not in varVal:
-                    if "+" or "*" or "/" or '**' or "-" or ('***') in varVal:
-
-                        varVal = eval(varVal)
-                        list_of_ints.append(varVal)
+                if 'var' not in varVal:
+                    if 'rand' not in varVal:
+                        if "+" or "*" or "/" or '**' or "-" or ('***') in varVal:
+                            varVal = eval(varVal)
+                            list_of_ints.append(varVal)
 
                 if 'var' in str(varVal):
                     for operators in logic_operators:
@@ -169,7 +169,7 @@ class Variable():
             varConvert = line.split("(")[-1].split(")")[0]
             varConvert = varConvert.split('=')[-1]
             for keys in varDict:
-                if keys in varConvert:
+                if varConvert in keys:
                     print(varDict[keys])
 
     def varLookUp(self,var_key_check):
