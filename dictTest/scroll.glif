@@ -3,13 +3,14 @@ $ b var $=Hi
 # l var #= 4
 
 # h var #= 44
-
+list names = jason,bre,ann
+write(i am here ti )
 dict name = r>ee, m>AA, n>d, 1>33
 
 dict jane = 3>f, 22>d, 33>ff, 33>54
 
 name^ n
-
+jane^ 3
 !if(# l var # < # h var #){
 write(ok)
 }

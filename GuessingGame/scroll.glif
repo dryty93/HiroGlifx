@@ -7,22 +7,28 @@ $ advan var $= a
 
 $^ state var ^$=UI(Guess a number between 1 and 100:)
 
-# ans var #=8
+# new_state var # = $^ state var ^$
+
+# ans var #=rand5
 
 $ ex var $=EXIT
 
-!if( $^ state var ^$ > # ans var # )!{
-write(Your guess is too high)
+write(# new_state_var #,,# ans var #)
+
+!if(# new_state var # > # ans var # )!{
+write(Your gue
+ss is too high)
 }
 
-!if( $^ state var ^$ < # ans var # )!{
+!if( # new_state var # < # ans var # )!{
 write(Your guess is too low)
 }
 
-!if( $^ state var ^$ == # ans var # )!{
-write(Correct)}
+!if(# new_state var # == # ans var # )!{
+write(Correct)
+}
 
-!if($^ state var ^$ @inside@ $ ex var $){
-brk}
+
+
 
 

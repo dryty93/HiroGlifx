@@ -21,5 +21,5 @@ def func add(x,y,i)
     x + y + i
     @ds n var @ds= add_func(3,4,5)
     }
-write(# n var #,, is the result of add)
+write(# n var #,, is returned by add)
 brk

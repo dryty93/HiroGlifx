@@ -119,17 +119,17 @@ class Dictionary():
         dict_look_up = StartInterpret.dict_look_up
         dict_look_up = dict_look_up[0].split('^')[-1].split("\n")[0]
         written_hiro_dictionary_name_by_itself = line.split("dict")[-1].split("\n")[0].split(" ")[-1].split(")")[0]
+        print(dict_of_hi_dicts_final_conversion.keys())
         for items in dict_of_hi_dicts_final_conversion.keys():
             if written_hiro_dictionary_name_by_itself in items:
                 dictionary_initial_index = 'dict '+ items +' ='+dict_of_hi_dicts_final_conversion[items]
-                print(dictionary_initial_index,)
         hi_dicts_key_val_map_preparer = eachDict[0].split(",")
         # this counts keys and appends to the count_hi_dicts_key_val_map_preparer
         count_hi_dicts_key_val_map_preparer_function = lambda count_keys: count_keys + 1 if count_keys < 3 else (
                     count_keys == 0)
         count_hi_dicts_key_val_map_preparer = [key for key in hi_dicts_key_val_map_preparer if
                                                count_hi_dicts_key_val_map_preparer_function]
-#        print(count_hi_dicts_key_val_map_preparer)
+        print(count_hi_dicts_key_val_map_preparer)
         for i in range(len(count_hi_dicts_key_val_map_preparer)):
             if i <= len(count_hi_dicts_key_val_map_preparer):
                 hiro_key_val_map[count_hi_dicts_key_val_map_preparer[i].split(">")[0]] = count_hi_dicts_key_val_map_preparer[i].split(">")[-1]
@@ -137,6 +137,7 @@ class Dictionary():
         # need to implement something so that the interpretter takes the users requested key
         # looks it up against the dictionary and returns the proper dictionary item. Right now
         try:
+            print(dict_look_up)
             print(hiro_key_val_map[dict_look_up])
         except:
             exit('HiroGlifx Interpretter: Key-Val Error: \nSpecified Key Not Found!')

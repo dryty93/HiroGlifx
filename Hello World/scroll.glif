@@ -4,6 +4,6 @@ write(Hello, World)
 !if(# n var # < # x var #)!{
 write(me) }
 loop_through(val=3:data_store=x){
-write(3), write(u)
+write(3,,ui), write(8)
 }brk
 

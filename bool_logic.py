@@ -68,7 +68,7 @@ class Bools():
                     condition_to_validate_left = var_look_up_list[0]
                 if 'var' in condition_to_validate_right:
                     Variable().varLookUp(condition_to_validate_right)
-                    condition_to_validate_right = var_look_up_list[0]
+                    condition_to_validate_right = var_look_up_list[-1]
                 code_to_execute_var_convert = str(condition_to_validate_left) + logical_operator + str(
                     condition_to_validate_right)
                 truth_detection = eval(code_to_execute_var_convert)

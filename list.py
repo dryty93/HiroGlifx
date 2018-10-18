@@ -42,6 +42,7 @@ def listMaker():
                 if 'var' not in listVals:
                     listDict[listName] = listVals
                     print(listDict,listVals)
+                print(listDict)
 
                 if 'var' in line:
 
@@ -51,8 +52,8 @@ def listMaker():
                     listName = line.split("list")[-1].split(")")[0] + " "
 
                     listPrinted = listName + ":" + listDict[listName]
-    try:
-        print(listPrinted)
-    except:
-        pass
+                    try:
+                        print(listPrinted)
+                    except:
+                        pass
 listMaker()

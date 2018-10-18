@@ -9,7 +9,6 @@ class Lib_Funcs():
         content_to_write = content_to_write.split("write")
         print(content_to_write)
 
-
     def write(self):
         global function_state
         global line
@@ -56,7 +55,12 @@ class Lib_Funcs():
                         Variable().varLookUp(items)
                         multi_line_write_statement.append(var_look_up_list[-1])
                     else:
-                        multi_line_write_statement.append(items)
+                        item_as_string = items
+                        item_as_string = " " , item_as_string , " "
+                        item_as_string = ''.join(item_as_string)
+                        multi_line_write_statement.append(item_as_string)
+
+
                 print(multi_line_write_statement)
     def writeDict(self):
 

@@ -7,6 +7,7 @@ from bool_logic import Bools
 from lineCount import line_location
 from user_defined_functions import Functions
 from user_blueprints import UserBP
+from gui_capabilities import makeWindow
 
 import time
 
@@ -66,8 +67,9 @@ class StartInterpret():
 
                         if 'write' not in self.line:
                             if '!' not in self.line:
-                                if 'index' not in line:
+                                if '^' not in line:
                                     Dictionary().dictMaker()
+
 
                     if '^' in self.line:
                         self.dict_look_up.append(line)
@@ -88,6 +90,8 @@ class StartInterpret():
                                 if 'list' not in self.line:
                                     if 'dict' not in self.line:
                                         Variable().newVariable()
+
+
                     if 'def func' in self.line:
                         Functions().init_function()
 
@@ -96,6 +100,12 @@ class StartInterpret():
                             Lib_Funcs().write()
                     if 'index' in line:
                         Dictionary().init_indexDict()
+                    if 'gui' in line:
+                        if 'window' in line:
+                            n = line.split('=')[1]
+                            length = n.split(' ')[1].split(',')[0]
+                            width = n.split(',')[1].split('\n')[0].split(' ')[-1]
+                            makeWindow(int(length),int(width))
 
                     if 'brk' in line:
                       #  print(line_location)
