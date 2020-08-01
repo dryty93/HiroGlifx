@@ -1,4 +1,4 @@
-HIROGLIFX
+**HIROGLIFX**
 
 ** due to updates a lot of this manual is deprecated. I am updating the
 ** docs as quickly as possible, but if you are unsure about what currently works
